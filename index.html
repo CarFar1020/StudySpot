@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Study Tool</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="main.js" defer></script>
+    </head>
+    <body id="body">
+        <div id="popup" class="popup hide">
+            <select id="subjectSelect" class="select" onchange="setSelector(select.list, lists[this.value]); everythingSelected();">
+                <option value="" selected hidden>Select a Subject</option>
+            </select>
+            <select id="listSelect" class="select hide" onchange="setSelector(select.q, lists[select.subject.value][this.value]); setSelector(select.a, lists[select.subject.value][this.value]); everythingSelected();">
+                <option value="" selected hidden>Select a List</option>
+            </select>
+            <select id="questionSelect" class="select hide" onchange="everythingSelected();">
+                <option value="" selected hidden>Select Question Type</option>
+            </select>
+            <select id="answerSelect" class="select hide" onchange="everythingSelected();">
+                <option value="" selected hidden>Select Answer Type</option>
+            </select>
+            <button onclick="loadList();" id="loadList" class="btn hide">Load List</button>
+        </div>
+        <div id="overlay" class="hide"></div>
+        <div id="tool">
+            <h1>日本の勉強</h1>
+            <h2 id="QA">Select a set and type, and then click start</h3>
+            <div id="drawingTool">
+                <canvas id="canvas" width="500" height="500"></canvas>
+                <div id="right">
+                    <button onclick="changeWeights(0.5);" id="w0" class="btn" disabled>I Have No Idea</button>
+                    <button onclick="changeWeights(1);" id="w1" class="btn" disabled>I Need More Practice</button>
+                    <button onclick="changeWeights(2);" id="w2" class="btn" disabled>I Think I've Got It</button>
+                    <button onclick="changeWeights(4);" id="w3" class="btn" disabled>100% I Know It</button>
+                </div>
+            </div>
+            <div id="center">
+                <input type="text" id="text" placeholder="Enter Answer If Relevant">
+            </div>
+            <div id="below">
+                <button id="next" class="below btn" onclick="next();" disabled>Start</button>
+                <button id="reset" class="below btn" onclick="resetCanvas();">Clear Canvas</button>
+            </div>
+        </div>
+    </body>
+</html>
