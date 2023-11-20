@@ -1,63 +1,4 @@
-const lists = {
-    japanese: {
-        APkanji: {
-            kanji: [
-                "悪", "安", "暗", "以", "意", "医", "育", "一", "員", "引", // 10
-                "飲", "院", "右", "雨", "運", "映", "泳", "英", "駅", "円", // 20
-                "園", "遠", "横", "屋", "温", "音", "下", "化", "何", "夏", // 30
-                "家", "科", "歌", "火", "花", "荷", "画", "会", "回", "海", // 40
-            ],
-            meaning: [
-                "Bad", "Cheap, Peaceful", "Dark", "to the ~ of", "Meaning, Mind",
-                "Medical", "To Raise", "One", "Member", "To Pull", // 10
-                "To Drink", "Institute", "Right (Side)", "Rain", "To Carry, Luck",
-                "To Project", "To Swim", "British, Brave", "Station", "Circle, Yen", // 20
-                "Garden", "Far", "Side", "Store, Roof", "Warm",
-                "Sound", "Under", "To Change", "What", "Summer", // 30
-                "House, Person", "Subject", "Song", "Fire", "Flower",
-                "Luggage", "Picture, Stroke", "To Meet", "-time(s)", "Sea, Ocean, Beach", // 40
-            ]
-        },
-        alphabet: {
-            hiragana: [
-                "あ", "い", "う", "え", "お",
-                "か", "き", "く", "け", "こ",
-                "さ", "し", "す", "せ", "そ",
-                "た", "ち", "つ", "て", "と",
-                "な", "に", "ぬ", "ね", "の",
-                "は", "ひ", "ふ", "へ", "ほ",
-                "ま", "み", "む", "め", "も",
-                "や", "ゆ", "よ",
-                "ら", "り", "る", "れ", "ろ",
-                "わ", "を", "ん"
-            ],
-            katakana: [
-                "ア", "イ", "ウ", "エ", "オ",
-                "カ", "キ", "ク", "ケ", "コ",
-                "サ", "シ", "ス", "セ", "ソ",
-                "タ", "チ", "ツ", "テ", "ト",
-                "ナ", "ニ", "ヌ", "ネ", "ノ",
-                "ハ", "ヒ", "フ", "ヘ", "ホ",
-                "マ", "ミ", "ム", "メ", "モ",
-                "ヤ", "ユ", "ヨ",
-                "ラ", "リ", "ル", "レ", "ロ",
-                "ワ", "ヲ", "ン"
-            ],
-            romaji: [
-                "a", "i", "u", "e", "o",
-                "ka", "ki", "ku", "ke", "ko",
-                "sa", "shi", "su", "se", "so",
-                "ta", "chi", "tsu", "te", "to",
-                "na", "ni", "nu", "ne", "no",
-                "ha", "hi", "fu", "he", "ho",
-                "ma", "mi", "mu", "me", "mo",
-                "ya", "yu", "yo",
-                "ra", "ri", "ru", "re", "ro",
-                "wa", "wo", "n"
-            ]
-        }
-    }
-};
+import { lists } from "./Modules/lists.js";
 
 const text = {
     alphabet: "Alphabet",
@@ -89,6 +30,7 @@ const select = {
 const btn = {
     load: document.getElementById("loadList"),
     next: document.getElementById("next"),
+    reset: document.getElementById("reset"),
     w0: document.getElementById("w0"),
     w1: document.getElementById("w1"),
     w2: document.getElementById("w2"),
@@ -252,22 +194,24 @@ function loadList() {
 }
 
 function setWeights() {
-    for (var subject in lists) {
-        weights[subject] = [];
-        for (var list in lists[subject]) {
-            weights[subject][list] = [];
-            for (let i = 0; i < Object.values(lists[subject][list])[0].length; i++) {
-                weights[subject][list].push(1);
+    if (localStorage.getItem("Weights") !== null) load();
+    else {
+        for (var subject in lists) {
+            weights[subject] = {};
+            for (var list in lists[subject]) {
+                weights[subject][list] = [];
+                for (let i = 0; i < Object.values(lists[subject][list])[0].length; i++) {
+                    weights[subject][list].push(10);
+                }
             }
         }
+        save();
     }
 }
 
 function changeWeights(w) {
-    let weight = weights[currentStr.subject][currentStr.list][listIndex];
-    console.log(weight);
-    weights[currentStr.subject][currentStr.list][listIndex] = Math.ceil(weight / w);
-    console.log(weight);
+    weights[currentStr.subject][currentStr.list][listIndex] = Math.ceil(weights[currentStr.subject][currentStr.list][listIndex] / w);
+    save();
     next();
 }
 
@@ -277,7 +221,7 @@ function togglePopup() {
 }
 
 function toggleDarkMode() {
-    elems = [body, popup, c];
+    var elems = [body, popup, c];
 
     for (let b in btn) {
         elems.push(btn[b]);
@@ -299,9 +243,18 @@ function everythingSelected() {
     else btn.load.classList.add("hide");
 }
 
+function save() {
+    localStorage.setItem("Weights", JSON.stringify(weights));
+}
+
+function load() {
+    weights = JSON.parse(localStorage.getItem("Weights"));
+}
+
 setSelector(select.subject, lists);
 resetCanvas();
 setWeights();
+load();
 toggleDarkMode();
 
 document.addEventListener("keydown", e => {
@@ -332,3 +285,25 @@ document.addEventListener("touchmove", e => {
     ctx.lineTo(pos.x, pos.y);
     ctx.stroke();
 });
+
+select.subject.addEventListener("change", e => {
+    setSelector(select.list, lists[select.subject.value]);
+    everythingSelected();
+});
+
+select.list.addEventListener("change", e => {
+    setSelector(select.q, lists[select.subject.value][select.list.value]);
+    setSelector(select.a, lists[select.subject.value][select.list.value]);
+    everythingSelected();
+});
+
+select.q.onchange = function(){ everythingSelected(); }
+select.a.onchange = function(){ everythingSelected(); }
+
+btn.load.onclick = function(){ loadList(); }
+btn.next.onclick = function(){ next(); };
+btn.reset.onclick = function(){ resetCanvas(); }
+btn.w0.onclick = function(){ changeWeights(0.5); }
+btn.w1.onclick = function(){ changeWeights(1); }
+btn.w2.onclick = function(){ changeWeights(2); }
+btn.w3.onclick = function(){ changeWeights(4); }
