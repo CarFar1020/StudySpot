@@ -57,6 +57,12 @@ select:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+}
+
+#settings {
+    position: absolute;
+    right: 0;
 }
 
 h2 {
@@ -86,6 +92,7 @@ button {
     width: 20vmin;
     height: 5vmin;
     font-weight: bold;
+    font-size: 2vmin;
 }
 
 .icon {
