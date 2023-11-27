@@ -75,6 +75,9 @@ var isSetList = false;
 var isSettings = false;
 var isAddList = false;
 
+var isTouch = false;
+var isMouse = false;
+
 function verticalDash(x, y) {
     ctx.beginPath();
     if (!isDarkmode) ctx.fillStyle = "lightgrey";
@@ -327,12 +330,42 @@ document.addEventListener("touchstart", e => {
     if (!isDarkmode) ctx.strokeStyle = "black";
     else ctx.strokeStyle = "white";
     ctx.moveTo(pos.x, pos.y);
+    isTouch = true;
 });
 
 document.addEventListener("touchmove", e => {
-    let pos = getTouchPosition(e);
-    ctx.lineTo(pos.x, pos.y);
-    ctx.stroke();
+    if (isTouch) {
+        let pos = getTouchPosition(e);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+    }
+});
+
+document.addEventListener("touchend", e => {
+    isTouch = false
+});
+
+document.addEventListener("mousedown", e => {
+    let pos = getMousePosition(e);
+    ctx.beginPath();
+    ctx.lineWidth = 5;
+    ctx.lineCap = 'round';
+    if (!isDarkmode) ctx.strokeStyle = "black";
+    else ctx.strokeStyle = "white";
+    ctx.moveTo(pos.x, pos.y);
+    isMouse = true;
+});
+
+document.addEventListener("mousemove", e => {
+    if (isMouse) {
+        let pos = getMousePosition(e);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+    }
+});
+
+document.addEventListener("mouseup", e => {
+    isMouse = false
 });
 
 select.subject.addEventListener("change", e => {
