@@ -1,3 +1,8 @@
+@keyframes spin {
+    from {transform: rotate(0deg); }
+    to {transform: rotate(180deg); }
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -107,6 +112,16 @@ button:hover {
     background: #DDD;
 }
 
+#settings:hover {
+    background-color: white;
+    animation-name: spin;
+    animation-duration: 2s;
+}
+
+#settings.darkmode:hover {
+    background-color: #222;
+}
+
 #type {
     display: grid;
     height: 10vmin;
@@ -153,8 +168,19 @@ img {
 
 .btn.darkmode:disabled {
     color: #BBB;
-    background-color: #111;
     border-color: #BBB;
+}
+
+.btn.darkmode:disabled:hover {
+    background-color: #222;
+}
+
+#reset.darkmode {
+    background-color: #880000;
+}
+
+#reset.darkmode:hover {
+    background-color: #BB0000;
 }
 
 .hide {
