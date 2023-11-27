@@ -7,35 +7,54 @@
     </head>
     <body id="body">
         <div id="popup" class="popup hide">
-            <select id="subjectSelect" class="select">
-                <option value="" selected hidden>Select a Subject</option>
-            </select>
-            <select id="listSelect" class="select hide">
-                <option value="" selected hidden>Select a List</option>
-            </select>
-            <select id="questionSelect" class="select hide">
-                <option value="" selected hidden>Select Question Type</option>
-            </select>
-            <select id="answerSelect" class="select hide">
-                <option value="" selected hidden>Select Answer Type</option>
-            </select>
-            <button id="loadList" class="btn hide">Load List</button>
+            <div id="setListB" class="buffer hide">
+                <select id="subjectSelect" class="select hide">
+                    <option value="" selected hidden>Select a Subject</option>
+                </select>
+                <select id="listSelect" class="select hide">
+                    <option value="" selected hidden>Select a List</option>
+                </select>
+                <select id="questionSelect" class="select hide">
+                    <option value="" selected hidden>Select Question Type</option>
+                </select>
+                <select id="answerSelect" class="select hide">
+                    <option value="" selected hidden>Select Answer Type</option>
+                </select>
+                <button id="loadList" class="btn hide">Load List</button>
+            </div>
+            <div id="settingsB" class="buffer hide">
+                
+            </div>
+            <div id="addListB" class="buffer hide">
+                
+            </div>
         </div>
         <div id="overlay" class="hide"></div>
         <div id="tool">
-            <h1>日本の勉強</h1>
-            <h2 id="QA">Select a set and type, and then click start</h3>
+            <div id="header">
+                <h1>StudySpot</h1>
+                <button id="settings" class="btn icon"><img src="./Assets/settings.png"></button>
+            </div>
+            <h2 id="QA">Select a List or Create Your Own</h3>
             <div id="drawingTool">
+                <div id="left">
+                    <div class="buffer">
+                        <button id="setList" class="btn">Set New List</button>
+                        <button id="addList" class="btn">Add New List</button>
+                    </div>
+                </div>
                 <canvas id="canvas" width="500" height="500"></canvas>
                 <div id="right">
-                    <button id="w0" class="btn" disabled>I Have No Idea</button>
-                    <button id="w1" class="btn" disabled>I Need More Practice</button>
-                    <button id="w2" class="btn" disabled>I Think I've Got It</button>
-                    <button id="w3" class="btn" disabled>100% I Know It</button>
+                    <div class="buffer">
+                        <button id="w0" class="btn" disabled>I Have No Idea</button>
+                        <button id="w1" class="btn" disabled>I Need More Practice</button>
+                        <button id="w2" class="btn" disabled>I Think I've Got It</button>
+                        <button id="w3" class="btn" disabled>100% I Know It</button>
+                    </div>
                 </div>
             </div>
             <div id="center">
-                <input type="text" id="text" placeholder="Enter Answer If Relevant">
+                <input type="text" id="text" class="hide" placeholder="Enter Answer If Relevant">
             </div>
             <div id="below">
                 <button id="next" class="below btn" disabled>Start</button>

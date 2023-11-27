@@ -7,6 +7,7 @@ body {
     width: 100vw;
     height: 100vh;
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .popup {
@@ -17,7 +18,12 @@ body {
     border: 0.25vmin solid black;
     border-radius: 2vmin;
     background-color: white;
+    display: flex;
+}
+
+.buffer {
     display: grid;
+    height: 0;
 }
 
 .select {
@@ -47,8 +53,18 @@ select:hover {
     display: grid;
 }
 
+#header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 h2 {
     height: 5vmin;
+}
+
+#left, #right {
+    display: grid;
 }
 
 canvas {
@@ -61,20 +77,22 @@ canvas {
     display: flex;
 }
 
-#right {
-    display: grid;
-    width: 44vmin;
-}
-
 button {
     background: white;
-    margin: 1vmin;
+    margin: 0.75vmin;
     outline: none;
     border: 0.2vmin solid black;
     border-radius: 1vmin;
     width: 20vmin;
     height: 5vmin;
     font-weight: bold;
+}
+
+.icon {
+    border: none;
+    width: 5vmin;
+    height: 5vmin;
+    padding: 0;
 }
 
 button:hover {
@@ -103,6 +121,12 @@ button:hover {
     width: 25vmin;
     height: 3vmin;
     font-size: 2vmin;
+    outline: none;
+}
+
+img {
+    width: 5vmin;
+    height: 5vmin;
 }
 
 .darkmode {
@@ -115,13 +139,15 @@ button:hover {
     background-color: #333;
 }
 
-select:disabled:hover, button:disabled:hover {
+.btn:disabled:hover {
     cursor: not-allowed;
     background: white;
 }
 
-select.darkmode:disabled:hover, button.darkmode:disabled:hover {
-    background: #222;
+.btn.darkmode:disabled {
+    color: #BBB;
+    background-color: #111;
+    border-color: #BBB;
 }
 
 .hide {

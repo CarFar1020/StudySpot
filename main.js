@@ -28,13 +28,22 @@ const select = {
 };
 
 const btn = {
+    addList: document.getElementById("addList"),
     load: document.getElementById("loadList"),
     next: document.getElementById("next"),
+    setList: document.getElementById("setList"),
     reset: document.getElementById("reset"),
+    settings: document.getElementById("settings"),
     w0: document.getElementById("w0"),
     w1: document.getElementById("w1"),
     w2: document.getElementById("w2"),
     w3: document.getElementById("w3")
+};
+
+const buffers = {
+    addList: document.getElementById("addListB"),
+    setList: document.getElementById("setListB"),
+    settings: document.getElementById("settingsB")
 };
 
 const dash = {
@@ -59,11 +68,17 @@ var listIndex;
 var currentElem = '';
 
 var weights = {};
-var darkmode = false;
+
+var isDarkmode = false;
+var isPopup = false;
+var isSetList = false;
+var isSettings = false;
+var isAddList = false;
 
 function verticalDash(x, y) {
     ctx.beginPath();
-    ctx.fillStyle = "lightgrey";
+    if (!isDarkmode) ctx.fillStyle = "lightgrey";
+    else ctx.fillStyle = "#444";
     ctx.arc(x, y, dash.r, 0, Math.PI*2);
     ctx.fillRect(x-dash.r, y, dash.r*2, dash.l);
     ctx.arc(x, y+dash.l, dash.r, 0, Math.PI*2);
@@ -72,7 +87,8 @@ function verticalDash(x, y) {
 
 function horizontalDash(x, y) {
     ctx.beginPath();
-    ctx.fillStyle = "lightgrey";
+    if (!isDarkmode) ctx.fillStyle = "lightgrey";
+    else ctx.fillStyle = "#444";
     ctx.arc(x, y, dash.r, 0, Math.PI*2);
     ctx.fillRect(x, y-dash.r, dash.l, dash.r*2);
     ctx.arc(x+dash.l, y, dash.r, 0, Math.PI*2);
@@ -218,10 +234,25 @@ function changeWeights(w) {
 function togglePopup() {
     popup.classList.toggle("hide");
     overlay.classList.toggle("hide");
+    if (isPopup) {
+        isPopup = false;
+        if (isSetList) {
+            isSetList = false;
+            buffers.setList.classList.add("hide");
+            for (let s in select) select[s].classList.add("hide");
+            btn.load.classList.add("hide");
+        } else if (isSettings) {
+            isSettings = false;
+            buffers.settings.classList.add("hide");
+        } else if (isAddList) {
+            isAddList = false;
+            buffers.addList.classList.add("hide");
+        }
+    } else isPopup = true;
 }
 
 function toggleDarkMode() {
-    var elems = [body, popup, c];
+    var elems = [body, popup, c, textBox];
 
     for (let b in btn) {
         elems.push(btn[b]);
@@ -234,8 +265,28 @@ function toggleDarkMode() {
     elems.forEach(elem => {
         elem.classList.toggle("darkmode");
     });
-    if (darkmode) darkmode = false;
-    else darkmode = true;
+    if (isDarkmode) isDarkmode = false;
+    else isDarkmode = true;
+    resetCanvas()
+}
+
+function setList() {
+    togglePopup();
+    isSetList = true;
+    buffers.setList.classList.remove("hide");
+    setSelector(select.subject, lists);
+}
+
+function settings() {
+    togglePopup();
+    isSettings = true;
+    buffers.settings.classList.remove("hide");
+}
+
+function addList() {
+    togglePopup();
+    isAddList = true;
+    buffers.addList.classList.remove("hide");
 }
 
 function everythingSelected() {
@@ -251,19 +302,16 @@ function load() {
     weights = JSON.parse(localStorage.getItem("Weights"));
 }
 
-setSelector(select.subject, lists);
 resetCanvas();
 setWeights();
-load();
-toggleDarkMode();
 
 document.addEventListener("keydown", e => {
     switch (e.key) {
+        case "Escape":
+            if (isPopup) togglePopup();
+            break;
         case "Enter":
             if (currentList.a != null) next();
-            break;
-        case "ArrowUp":
-            togglePopup();
             break;
         case "ArrowDown":
             toggleDarkMode();
@@ -276,7 +324,8 @@ document.addEventListener("touchstart", e => {
     ctx.beginPath();
     ctx.lineWidth = 5;
     ctx.lineCap = 'round';
-    ctx.fillStyle = "black";
+    if (!isDarkmode) ctx.strokeStyle = "black";
+    else ctx.strokeStyle = "white";
     ctx.moveTo(pos.x, pos.y);
 });
 
@@ -288,21 +337,24 @@ document.addEventListener("touchmove", e => {
 
 select.subject.addEventListener("change", e => {
     setSelector(select.list, lists[select.subject.value]);
-    everythingSelected();
+    btn.load.classList.add("hide");
 });
 
 select.list.addEventListener("change", e => {
     setSelector(select.q, lists[select.subject.value][select.list.value]);
     setSelector(select.a, lists[select.subject.value][select.list.value]);
-    everythingSelected();
+    btn.load.classList.add("hide");
 });
 
 select.q.onchange = function(){ everythingSelected(); }
 select.a.onchange = function(){ everythingSelected(); }
 
+btn.addList.onclick = function() { addList(); };
 btn.load.onclick = function(){ loadList(); }
 btn.next.onclick = function(){ next(); };
+btn.setList.onclick = function(){ setList(); }
 btn.reset.onclick = function(){ resetCanvas(); }
+btn.settings.onclick = function() { settings(); }
 btn.w0.onclick = function(){ changeWeights(0.5); }
 btn.w1.onclick = function(){ changeWeights(1); }
 btn.w2.onclick = function(){ changeWeights(2); }

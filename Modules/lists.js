@@ -52,7 +52,7 @@ export const lists = {
                 "Garden", "Far", "Side", "Store, Roof", "Warm",
                 "Sound", "Under", "To Change", "What", "Summer", // 30
                 "House, Person", "Subject", "Song", "Fire", "Flower",
-                "Luggage", "Picture, Stroke", "To Meet", "-time(s)", "Sea, Ocean, Beach", // 40
+                "Luggage", "Picture, Stroke", "To Meet", "-Time(s) (Counting)", "Sea, Ocean, Beach", // 40
                 "Boundary", "Everyone", "Painting", "To Open", "Floor", 
                 "Outside", "To Learn", "Enjoyable", "Active, Live", "Cold", // 50
                 "Chinese", "Interval, Space", "Barrier", "Building", "Face", 
@@ -79,7 +79,7 @@ export const lists = {
                 "Truth", "To Copy", "Company", "Person", "Car", // 160
                 "Young", "Main", "To Take", "Hand, Person", "Alcohol", 
                 "To Receive (Often Hurtful)", "To Receive (From Superior)", "State", "Autumn", "To End", // 170
-                "To Learn", "Week", "To Gather, To Collect", "To Live", "Ten", 
+                "To Learn", "Week", "To Gather, To Collect", "To Live (At)", "Ten", 
                 "Heavy", "Inn", "To Go Out", "Art", "Spring", // 180
                 "Beginning", "Place (Location)", "Hot", "To Write", "Female", 
                 "Commercial", "Small", "Few", "To Smile, To Laugh", "Top", // 190
@@ -103,7 +103,7 @@ export const lists = {
                 "Long, Head", "Bird", "Painful", "To Go Through, Commute", "Low", // 280
                 "Fixed", "Garden", "Younger Brother", "-Like, Target", "Heaven", 
                 "Store", "To Roll", "Point", "To Convey", "Rice Field", // 290
-                "Electricity", "To Climb", "Capital", "-Time(s)", "Soil", 
+                "Electricity", "To Climb", "Capital", "-Time(s) (Temperature Or Small Numbers", "Soil", 
                 "Winter", "Island", "East", "Answer", "Head", // 300
                 "To Work", "To Move", "Same", "Road, Way", "Special", 
                 "To Read", "Inside", "South", "Difficult", "Two", // 310
