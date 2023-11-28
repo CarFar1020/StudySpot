@@ -65,6 +65,11 @@ select:hover {
     position: relative;
 }
 
+#clearStorage {
+    position: absolute;
+    right: 7vmin;
+}
+
 #settings {
     position: absolute;
     right: 0;

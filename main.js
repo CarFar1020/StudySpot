@@ -28,6 +28,7 @@ const select = {
 
 const btn = {
     addList: document.getElementById("addList"),
+    clearStorage: document.getElementById("clearStorage"),
     load: document.getElementById("loadList"),
     next: document.getElementById("next"),
     setList: document.getElementById("setList"),
@@ -291,12 +292,7 @@ function save() {
 }
 
 function load() {
-    try {
-        weights = JSON.parse(localStorage.getItem("Weights"));
-    } catch {
-        localStorage.removeItem("Weights");
-        setWeights();
-    }
+    weights = JSON.parse(localStorage.getItem("Weights"));
 }
 
 resetCanvas();
@@ -371,7 +367,8 @@ select.list.addEventListener("change", e => {
 select.q.onchange = function(){ everythingSelected(); }
 select.a.onchange = function(){ everythingSelected(); }
 
-btn.addList.onclick = function() { addList(); };
+btn.addList.onclick = function() { addList(); }
+btn.clearStorage.onclick = function() { localStorage.removeItem('Weights'); setWeights(); }
 btn.load.onclick = function(){ loadList(); }
 btn.next.onclick = function(){ next(); };
 btn.setList.onclick = function(){ setList(); }
