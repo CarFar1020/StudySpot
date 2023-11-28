@@ -21,7 +21,6 @@ const QA = document.getElementById("QA");
 const textBox = document.getElementById("text");
 
 const select = {
-    subject: document.getElementById("subjectSelect"),
     list: document.getElementById("listSelect"),
     q: document.getElementById("questionSelect"),
     a: document.getElementById("answerSelect")
@@ -52,13 +51,11 @@ const dash = {
 };
 
 var currentList = {
-    subject: null,
     list: null,
     a: null,
     q: null
 };
 var currentStr = {
-    subject: null,
     list: null,
     a: null,
     q: null
@@ -108,15 +105,15 @@ function getMousePosition(e) {
 
 function getRandomIndex() {
     let pool = 0;
-    weights[currentStr.subject][currentStr.list].forEach(weight => {
+    weights[currentStr.list].forEach(weight => {
         pool += weight;
     });
     let chosenIndex = Math.floor(Math.random()*pool);
-    for (let wi = 0; wi < weights[currentStr.subject][currentStr.list].length; wi++) {
-        for (let i = 0; i < weights[currentStr.subject][currentStr.list][wi]; i++) {
+    for (let wi = 0; wi < weights[currentStr.list].length; wi++) {
+        for (let i = 0; i < weights[currentStr.list][wi]; i++) {
             if (chosenIndex == i) return wi;
         }
-        chosenIndex -= weights[currentStr.subject][currentStr.list][wi];
+        chosenIndex -= weights[currentStr.list][wi];
     }
 }
 
@@ -200,8 +197,7 @@ function loadList() {
     for (let s in select) {
         currentStr[s] = select[s].value;
     }
-    currentList.subject = lists[currentStr.subject];
-    currentList.list = currentList.subject[currentStr.list];
+    currentList.list = lists[currentStr.list];
     currentList.q = currentList.list[currentStr.q];
     currentList.a = currentList.list[currentStr.a];
 
@@ -215,13 +211,10 @@ function loadList() {
 function setWeights() {
     if (localStorage.getItem("Weights") !== null) load();
     else {
-        for (var subject in lists) {
-            weights[subject] = {};
-            for (var list in lists[subject]) {
-                weights[subject][list] = [];
-                for (let i = 0; i < Object.values(lists[subject][list])[0].length; i++) {
-                    weights[subject][list].push(10);
-                }
+        for (var list in lists) {
+            weights[list] = [];
+            for (let i = 0; i < Object.values(lists[list])[0].length; i++) {
+                weights[list].push(10);
             }
         }
         save();
@@ -229,7 +222,7 @@ function setWeights() {
 }
 
 function changeWeights(w) {
-    weights[currentStr.subject][currentStr.list][listIndex] = Math.ceil(weights[currentStr.subject][currentStr.list][listIndex] / w);
+    weights[currentStr.list][listIndex] = Math.ceil(weights[currentStr.list][listIndex] / w);
     save();
     next();
 }
@@ -277,7 +270,7 @@ function setList() {
     togglePopup();
     isSetList = true;
     buffers.setList.classList.remove("hide");
-    setSelector(select.subject, lists);
+    setSelector(select.list, lists);
 }
 
 function settings() {
@@ -302,7 +295,12 @@ function save() {
 }
 
 function load() {
-    weights = JSON.parse(localStorage.getItem("Weights"));
+    try {
+        weights = JSON.parse(localStorage.getItem("Weights"));
+    } catch {
+        localStorage.removeItem("Weights");
+        setWeights();
+    }
 }
 
 resetCanvas();
@@ -368,14 +366,9 @@ document.addEventListener("mouseup", e => {
     isMouse = false
 });
 
-select.subject.addEventListener("change", e => {
-    setSelector(select.list, lists[select.subject.value]);
-    btn.load.classList.add("hide");
-});
-
 select.list.addEventListener("change", e => {
-    setSelector(select.q, lists[select.subject.value][select.list.value]);
-    setSelector(select.a, lists[select.subject.value][select.list.value]);
+    setSelector(select.q, lists[select.list.value]);
+    setSelector(select.a, lists[select.list.value]);
     btn.load.classList.add("hide");
 });
 
