@@ -115,6 +115,7 @@ function getRandomIndex() {
         }
         chosenIndex -= weights[currentStr.list][wi];
     }
+    return 0;
 }
 
 function getTouchPosition(e) {
@@ -153,32 +154,27 @@ function setSelector(s, list) {
     }
 }
 
-function enableWBtns() {
-    btn.w0.removeAttribute("disabled");
-    btn.w1.removeAttribute("disabled");
-    btn.w2.removeAttribute("disabled");
-    btn.w3.removeAttribute("disabled");
-}
-
-function disableWBtns() {
-    btn.w0.setAttribute("disabled", "");
-    btn.w1.setAttribute("disabled", "");
-    btn.w2.setAttribute("disabled", "");
-    btn.w3.setAttribute("disabled", "");
+function toggleWBtns() {
+    btn.w0.toggleAttribute("disabled");
+    btn.w1.toggleAttribute("disabled");
+    btn.w2.toggleAttribute("disabled");
+    btn.w3.toggleAttribute("disabled");
 }
 
 function next() {
     if (currentElem == 'q') {
         currentElem = 'a';
         revealAnswer();
-        enableWBtns();
         btn.next.setAttribute("disabled", "");
+        toggleWBtns();
     } else {
         if (currentElem == '') btn.next.innerHTML = "Reveal Answer";
-        else btn.next.removeAttribute("disabled");
+        else {
+            btn.next.removeAttribute("disabled");
+            toggleWBtns();
+        }
         currentElem = 'q';
         nextQuestion();
-        disableWBtns();
     }
 }
 
