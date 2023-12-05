@@ -38,6 +38,10 @@ function openSettings() {
 
 /**
  * Toggles the popup window and sets up the relevent information based on what the user selected.
+ * @param {Object} [popupType={}]      Shows which popup widow has been opened
+ * @param {Boolean} popupType.add      True if user opened the addList popup window
+ * @param {Boolean} popupType.set      True if user opened the setList popup window
+ * @param {Boolean} popupType.settings True if user opened the settings popup window
  */
 export function togglePopup({add, set, settings} = {}) {
     popup.classList.toggle("hide");

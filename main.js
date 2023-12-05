@@ -169,7 +169,7 @@ function textToCanvas(text) {
 /**
  * Adds the properties of a given list as the options for a given select element.
  * @param {HTMLSelectElement} s    A select element
- * @param {Object}            list Either an object of object or an object of lists
+ * @param {Object}            list Either an object of objects or an object of lists
  */
 export function setSelector(s, list) {
     s.classList.remove("hide");
