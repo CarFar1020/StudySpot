@@ -1,7 +1,7 @@
 import { lists } from "./Modules/lists.js";
 import { popup, isPopup, togglePopup } from "./Modules/popup.js";
 import { c, textToCanvas, resetCanvas, drawStart, draw } from "./Modules/draw.js";
-import { weights, setWeights, changeWeights } from "./Modules/weights.js";
+import { weights, setWeights, changeWeights, toggleWBtns } from "./Modules/weights.js";
 
 const text = {
     alphabet: "Alphabet",
@@ -43,6 +43,7 @@ export var currentList = {
     a: null,
     q: null
 };
+
 export var currentStr = {
     list: null,
     a: null,
@@ -124,7 +125,7 @@ export function setSelector(s, list) {
 /**
  * Runs the relevant sequence of code depending on the value of currentElem.
  */
-function next() {
+export function next() {
     if (currentElem == 'q') {
         currentElem = 'a';
         revealAnswer();

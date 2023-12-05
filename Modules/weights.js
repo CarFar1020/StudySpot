@@ -1,4 +1,4 @@
-import { btn, currentStr, listIndex } from "../main.js";
+import { btn, currentStr, listIndex, next } from "../main.js";
 import { lists } from "./lists.js";
 
 export var weights = {};
@@ -6,7 +6,7 @@ export var weights = {};
 /**
  * Toggles the disabled attribute of the buttons w0, w1, w2, and w3.
  */
-function toggleWBtns() {
+export function toggleWBtns() {
     btn.w0.toggleAttribute("disabled");
     btn.w1.toggleAttribute("disabled");
     btn.w2.toggleAttribute("disabled");
@@ -34,7 +34,7 @@ export function setWeights() {
  * Changes the relevant weight based on the user's selection, saves the new weights to local storage, and moves to the next term.
  * @param {Number} w The factor to divide the current weight by
  */
-function changeWeights(w) {
+export function changeWeights(w) {
     weights[currentStr.list][listIndex] = Math.ceil(weights[currentStr.list][listIndex] / w);
     save();
     next();
