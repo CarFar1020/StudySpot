@@ -167,3 +167,14 @@ export const lists = {
         ]
     }
 };
+
+export const text = {
+    alphabet: "Alphabet",
+    APkanji: "AP Kanji",
+    hiragana: "Hiragana",
+    japanese: "Japanese",
+    kanji: "Kanji",
+    katakana: "Katakana",
+    meaning: "Meaning",
+    romaji: "Romaji"
+};

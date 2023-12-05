@@ -1,18 +1,7 @@
-import { lists } from "./Modules/lists.js";
+import { lists, text } from "./Modules/lists.js";
 import { popup, isPopup, togglePopup } from "./Modules/popup.js";
 import { c, textToCanvas, resetCanvas, drawStart, draw } from "./Modules/draw.js";
 import { weights, setWeights, changeWeights, toggleWBtns } from "./Modules/weights.js";
-
-const text = {
-    alphabet: "Alphabet",
-    APkanji: "AP Kanji",
-    hiragana: "Hiragana",
-    japanese: "Japanese",
-    kanji: "Kanji",
-    katakana: "Katakana",
-    meaning: "Meaning",
-    romaji: "Romaji"
-};
 
 const body = document.getElementById("body");
 const QA = document.getElementById("QA");
