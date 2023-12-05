@@ -75,6 +75,18 @@ select:hover {
     right: 0;
 }
 
+.option {
+    margin: 2.5vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pOption {
+    width: 45vmin;
+    text-align: left;
+}
+
 .switch {
     position: relative;
     display: inline-block;

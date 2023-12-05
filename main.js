@@ -27,6 +27,10 @@ export const btn = {
     w3: document.getElementById("w3")
 };
 
+const slider = {
+    darkmode: document.getElementById("darkmodeSlider")
+};
+
 export var currentList = {
     list: null,
     a: null,
@@ -208,9 +212,6 @@ document.addEventListener("keydown", e => {
         case "Enter":
             if (currentList.a != null) next();
             break;
-        case "ArrowDown":
-            toggleDarkMode();
-            break;
     }
 });
 
@@ -261,3 +262,5 @@ btn.w0.onclick = function(){ changeWeights(0.5); }
 btn.w1.onclick = function(){ changeWeights(1); }
 btn.w2.onclick = function(){ changeWeights(2); }
 btn.w3.onclick = function(){ changeWeights(4); }
+
+slider.darkmode.onchange = function(){ toggleDarkMode(); }
