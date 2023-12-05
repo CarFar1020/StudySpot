@@ -2,7 +2,7 @@ import { select, btn, setSelector } from "../main.js";
 import { lists } from "./lists.js";
 
 export const popup = document.getElementById("popup");
-const overlay = document.getElementById("overlay");
+export const overlay = document.getElementById("overlay");
 
 const buffers = {
     add: document.getElementById("addListB"),

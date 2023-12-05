@@ -1,5 +1,5 @@
 import { lists, text } from "./Modules/lists.js";
-import { popup, isPopup, togglePopup } from "./Modules/popup.js";
+import { popup, overlay, isPopup, togglePopup } from "./Modules/popup.js";
 import { c, textToCanvas, resetCanvas, drawStart, draw } from "./Modules/draw.js";
 import { weights, setWeights, changeWeights, toggleWBtns } from "./Modules/weights.js";
 
@@ -213,6 +213,10 @@ document.addEventListener("keydown", e => {
             if (currentList.a != null) next();
             break;
     }
+});
+
+overlay.addEventListener("click", e => {
+    togglePopup();
 });
 
 document.addEventListener("touchstart", e => {
