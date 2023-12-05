@@ -82,6 +82,10 @@ select:hover {
     align-items: center;
 }
 
+p {
+    font-size: 2vmin;
+}
+
 .pOption {
     width: 45vmin;
     text-align: left;

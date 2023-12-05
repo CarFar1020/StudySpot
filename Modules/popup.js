@@ -16,14 +16,14 @@ export var isPopup = false;
  * Sets up the area for the user to create their own list.
  */
 function addList() {
-    buffers.add.classList.toggle("hide");
+    buffers.add.classList.remove("hide");
 }
 
 /**
  * Sets up the area for the user to choose a new list to start studying.
  */
 function setList() {
-    buffers.set.classList.toggle("hide");
+    buffers.set.classList.remove("hide");
     for (let s in select) select[s].classList.add("hide");
     btn.load.classList.add("hide");
     setSelector(select.list, lists);
@@ -33,7 +33,7 @@ function setList() {
  * Sets up the area for the user to change their settings.
  */
 function openSettings() {
-    buffers.settings.classList.toggle("hide");
+    buffers.settings.classList.remove("hide");
 }
 
 /**
@@ -49,6 +49,10 @@ export function togglePopup({add, set, settings} = {}) {
     
     if (isPopup) isPopup = false;
     else isPopup = true;
+
+    for (let b in buffers) {
+        buffers[b].classList.add("hide");
+    }
     
     if (set) setList();
     if (settings) openSettings();
