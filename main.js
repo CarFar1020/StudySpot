@@ -59,6 +59,20 @@ function getMousePosition(e) {
 }
 
 /**
+ * Gets the position of the touch event on the canvas.
+ * @param   {Event} e A touch event
+ * @returns {Object}  The position of the touch event
+ */
+function getTouchPosition(e) {
+    let touch = e.touches[0] || e.changedTouches[0];
+    let rect = c.getBoundingClientRect();
+    return {
+        x: (touch.pageX - rect.left) * (c.width / rect.width),
+        y: (touch.pageY - rect.top) * (c.height / rect.height)
+    }
+}
+
+/**
  * Gets a random index of the selected list of terms based on their weights.
  * @returns {Number} An index of a list
  */
@@ -75,20 +89,6 @@ function getRandomIndex() {
         chosenIndex -= weights[currentStr.list][wi];
     }
     return 0;
-}
-
-/**
- * Gets the position of the touch event on the canvas.
- * @param   {Event} e A touch event
- * @returns {Object}  The position of the touch event
- */
-function getTouchPosition(e) {
-    let touch = e.touches[0] || e.changedTouches[0];
-    let rect = c.getBoundingClientRect();
-    return {
-        x: (touch.pageX - rect.left) * (c.width / rect.width),
-        y: (touch.pageY - rect.top) * (c.height / rect.height)
-    }
 }
 
 /**
