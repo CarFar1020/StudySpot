@@ -17,6 +17,8 @@ body {
 
 .popup {
     position: absolute;
+    padding: 2vmin;
+    padding-top: 1vmin;
     z-index: 2;
     width: 60vmin;
     height: 70vmin;
@@ -33,7 +35,6 @@ body {
 
 .select {
     background: white;
-    margin: 1vmin;
     outline: none;
     border: none;
     width: 20vmin;
@@ -65,21 +66,13 @@ select:hover {
     position: relative;
 }
 
-#clearStorage {
-    position: absolute;
-    right: 7vmin;
-}
-
 #settings {
     position: absolute;
     right: 0;
 }
 
 .option {
-    margin: 2.5vmin;
-    margin-top: 1vmin;
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
@@ -88,12 +81,13 @@ p {
 }
 
 .pOption {
-    width: 45vmin;
+    width: 50vmin;
     text-align: left;
 }
 
 .pInput {
     margin-right: 1vmin;
+    text-align: left;
 }
 
 .textInput {
@@ -102,6 +96,10 @@ p {
     border-radius: 0.5vmin;
     height: 3vmin;
     font-size: 2vmin;
+}
+
+.short {
+    width: 5vmin;
 }
 
 .switch {
