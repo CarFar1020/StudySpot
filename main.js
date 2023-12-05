@@ -15,7 +15,6 @@ export const select = {
 
 export const btn = {
     addList: document.getElementById("addList"),
-    clearStorage: document.getElementById("clearStorage"),
     load: document.getElementById("loadList"),
     next: document.getElementById("next"),
     setList: document.getElementById("setList"),
@@ -256,7 +255,6 @@ select.q.onchange = function(){ everythingSelected(); }
 select.a.onchange = function(){ everythingSelected(); }
 
 btn.addList.onclick = function() { togglePopup({add:true}); }
-btn.clearStorage.onclick = function() { localStorage.removeItem('Weights'); setWeights(); }
 btn.load.onclick = function(){ loadList(); }
 btn.next.onclick = function(){ next(); };
 btn.setList.onclick = function(){ togglePopup({set:true}); }
