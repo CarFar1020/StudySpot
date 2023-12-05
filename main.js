@@ -1,4 +1,5 @@
 import { lists } from "./Modules/lists.js";
+import { popup, isPopup, togglePopup } from "./Modules/popup.js";
 
 const text = {
     alphabet: "Alphabet",
@@ -15,18 +16,16 @@ const c = document.getElementById("canvas");
 const ctx = c.getContext('2d');
 
 const body = document.getElementById("body");
-const popup = document.getElementById("popup");
-const overlay = document.getElementById("overlay");
 const QA = document.getElementById("QA");
 const textBox = document.getElementById("text");
 
-const select = {
+export const select = {
     list: document.getElementById("listSelect"),
     q: document.getElementById("questionSelect"),
     a: document.getElementById("answerSelect")
 };
 
-const btn = {
+export const btn = {
     addList: document.getElementById("addList"),
     clearStorage: document.getElementById("clearStorage"),
     load: document.getElementById("loadList"),
@@ -38,12 +37,6 @@ const btn = {
     w1: document.getElementById("w1"),
     w2: document.getElementById("w2"),
     w3: document.getElementById("w3")
-};
-
-const buffers = {
-    addList: document.getElementById("addListB"),
-    setList: document.getElementById("setListB"),
-    settings: document.getElementById("settingsB")
 };
 
 const dash = {
@@ -68,14 +61,14 @@ var currentElem = '';
 var weights = {};
 
 var isDarkmode = false;
-var isPopup = false;
-var isSetList = false;
-var isSettings = false;
-var isAddList = false;
-
 var isTouch = false;
 var isMouse = false;
 
+/**
+ * Draws a vertical dash onto the canvas at position (x, y).
+ * @param {Number} x The x position of the dash on the canvas
+ * @param {Number} y The y position of the dash on the canvas
+ */
 function verticalDash(x, y) {
     ctx.beginPath();
     if (!isDarkmode) ctx.fillStyle = "lightgrey";
@@ -86,6 +79,11 @@ function verticalDash(x, y) {
     ctx.fill();
 }
 
+/**
+ * Draws a horizontal dash onto the canvas at position (x, y).
+ * @param {Number} x The x position of the dash on the canvas
+ * @param {Number} y The y position of the dash on the canvas
+ */
 function horizontalDash(x, y) {
     ctx.beginPath();
     if (!isDarkmode) ctx.fillStyle = "lightgrey";
@@ -96,6 +94,11 @@ function horizontalDash(x, y) {
     ctx.fill();
 }
 
+/**
+ * Gets the position of the mouse event on the canvas.
+ * @param   {Event} e A mouse event
+ * @returns {Object}  The position of the mouse evemt
+ */
 function getMousePosition(e) {
     let rect = c.getBoundingClientRect();
     return {
@@ -104,6 +107,10 @@ function getMousePosition(e) {
     };
 }
 
+/**
+ * Gets a random index of the selected list of terms based on their weights.
+ * @returns {Number} An index of a list
+ */
 function getRandomIndex() {
     let pool = 0;
     weights[currentStr.list].forEach(weight => {
@@ -119,6 +126,11 @@ function getRandomIndex() {
     return 0;
 }
 
+/**
+ * Gets the position of the touch event on the canvas.
+ * @param   {Event} e A touch event
+ * @returns {Object}  The position of the touch event
+ */
 function getTouchPosition(e) {
     let touch = e.touches[0] || e.changedTouches[0];
     let rect = c.getBoundingClientRect();
@@ -128,6 +140,9 @@ function getTouchPosition(e) {
     }
 }
 
+/**
+ * Clears any user drawn content from the canvas.
+ */
 function resetCanvas() {
     ctx.clearRect(0, 0, c.width, c.height);
     
@@ -138,9 +153,25 @@ function resetCanvas() {
     for (let y = 0; y < c.height; y += 75) {
         verticalDash(c.width/2, y);
     }
+
+    if (currentElem == "a") textToCanvas(currentList.a[listIndex])
 }
 
-function setSelector(s, list) {
+/**
+ * Adds the answer to the background of the canvas.
+ * @param {String} text The answer to the current question 
+ */
+function textToCanvas(text) {
+    ctx.font = "50vmin Arial";
+    ctx.fillText(text, 0, 400);
+}
+
+/**
+ * Adds the properties of a given list as the options for a given select element.
+ * @param {HTMLSelectElement} s    A select element
+ * @param {Object}            list Either an object of object or an object of lists
+ */
+export function setSelector(s, list) {
     s.classList.remove("hide");
     while (s.childElementCount > 1) {
         s.removeChild(s.lastChild);
@@ -155,6 +186,9 @@ function setSelector(s, list) {
     }
 }
 
+/**
+ * Toggles the disabled attribute of the buttons w0, w1, w2, and w3.
+ */
 function toggleWBtns() {
     btn.w0.toggleAttribute("disabled");
     btn.w1.toggleAttribute("disabled");
@@ -162,6 +196,9 @@ function toggleWBtns() {
     btn.w3.toggleAttribute("disabled");
 }
 
+/**
+ * Runs the relevant sequence of code depending on the value of currentElem.
+ */
 function next() {
     if (currentElem == 'q') {
         currentElem = 'a';
@@ -179,6 +216,9 @@ function next() {
     }
 }
 
+/**
+ * Loads the next random term.
+ */
 function nextQuestion() {
     listIndex = getRandomIndex();
     QA.innerHTML = currentList.q[listIndex] + ": ?";
@@ -186,10 +226,17 @@ function nextQuestion() {
     resetCanvas();
 }
 
+/**
+ * Reveals the corresponding answer to the current term.
+ */
 function revealAnswer() {
     QA.innerHTML = currentList.q[listIndex] + ": " + currentList.a[listIndex];
+    textToCanvas(currentList.a[listIndex]);
 }
 
+/**
+ * Sets up the program to start studying after a list has been selected.
+ */
 function loadList() {
     for (let s in select) {
         currentStr[s] = select[s].value;
@@ -205,9 +252,13 @@ function loadList() {
     togglePopup();
 }
 
+/**
+ * Loads the weights variable from local storage if it already exists. Otherwise, creates new weights with a base value of 10.
+ */
 function setWeights() {
     if (localStorage.getItem("Weights") !== null) load();
     else {
+        weights = {};
         for (var list in lists) {
             weights[list] = [];
             for (let i = 0; i < Object.values(lists[list])[0].length; i++) {
@@ -218,32 +269,19 @@ function setWeights() {
     }
 }
 
+/**
+ * Changes the relevant weight based on the user's selection, saves the new weights to local storage, and moves to the next term.
+ * @param {Number} w The factor to divide the current weight by
+ */
 function changeWeights(w) {
     weights[currentStr.list][listIndex] = Math.ceil(weights[currentStr.list][listIndex] / w);
     save();
     next();
 }
 
-function togglePopup() {
-    popup.classList.toggle("hide");
-    overlay.classList.toggle("hide");
-    if (isPopup) {
-        isPopup = false;
-        if (isSetList) {
-            isSetList = false;
-            buffers.setList.classList.add("hide");
-            for (let s in select) select[s].classList.add("hide");
-            btn.load.classList.add("hide");
-        } else if (isSettings) {
-            isSettings = false;
-            buffers.settings.classList.add("hide");
-        } else if (isAddList) {
-            isAddList = false;
-            buffers.addList.classList.add("hide");
-        }
-    } else isPopup = true;
-}
-
+/**
+ * Toggles darkmode for each relevant element.
+ */
 function toggleDarkMode() {
     var elems = [body, popup, c, textBox];
 
@@ -263,34 +301,24 @@ function toggleDarkMode() {
     resetCanvas()
 }
 
-function setList() {
-    togglePopup();
-    isSetList = true;
-    buffers.setList.classList.remove("hide");
-    setSelector(select.list, lists);
-}
-
-function settings() {
-    togglePopup();
-    isSettings = true;
-    buffers.settings.classList.remove("hide");
-}
-
-function addList() {
-    togglePopup();
-    isAddList = true;
-    buffers.addList.classList.remove("hide");
-}
-
+/**
+ * Checks if the question and answer select elements have an option selected, and if so, shows the load button.
+ */
 function everythingSelected() {
     if (select.a.value != "" && select.q.value != "") btn.load.classList.remove("hide");
     else btn.load.classList.add("hide");
 }
 
+/**
+ * Saves the weights variable to local storage.
+ */
 function save() {
     localStorage.setItem("Weights", JSON.stringify(weights));
 }
 
+/**
+ * Gets the weights variable from local storage.
+ */
 function load() {
     weights = JSON.parse(localStorage.getItem("Weights"));
 }
@@ -367,13 +395,13 @@ select.list.addEventListener("change", e => {
 select.q.onchange = function(){ everythingSelected(); }
 select.a.onchange = function(){ everythingSelected(); }
 
-btn.addList.onclick = function() { addList(); }
+btn.addList.onclick = function() { togglePopup({add:true}); }
 btn.clearStorage.onclick = function() { localStorage.removeItem('Weights'); setWeights(); }
 btn.load.onclick = function(){ loadList(); }
 btn.next.onclick = function(){ next(); };
-btn.setList.onclick = function(){ setList(); }
+btn.setList.onclick = function(){ togglePopup({set:true}); }
 btn.reset.onclick = function(){ resetCanvas(); }
-btn.settings.onclick = function() { settings(); }
+btn.settings.onclick = function() { togglePopup({settings:true}); }
 btn.w0.onclick = function(){ changeWeights(0.5); }
 btn.w1.onclick = function(){ changeWeights(1); }
 btn.w2.onclick = function(){ changeWeights(2); }
