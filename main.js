@@ -1,5 +1,6 @@
 import { lists } from "./Modules/lists.js";
 import { popup, isPopup, togglePopup } from "./Modules/popup.js";
+import { c, textToCanvas, resetCanvas, drawStart, draw } from "./Modules/draw.js";
 
 const text = {
     alphabet: "Alphabet",
@@ -11,9 +12,6 @@ const text = {
     meaning: "Meaning",
     romaji: "Romaji"
 };
-
-const c = document.getElementById("canvas");
-const ctx = c.getContext('2d');
 
 const body = document.getElementById("body");
 const QA = document.getElementById("QA");
@@ -39,12 +37,7 @@ export const btn = {
     w3: document.getElementById("w3")
 };
 
-const dash = {
-    r: 5,
-    l: 50
-};
-
-var currentList = {
+export var currentList = {
     list: null,
     a: null,
     q: null
@@ -55,44 +48,13 @@ var currentStr = {
     q: null
 };
 
-var listIndex;
-var currentElem = '';
+export var listIndex;
+export var currentElem = '';
 
 var weights = {};
 
-var isDarkmode = false;
-var isTouch = false;
+export var isDarkmode = false;
 var isMouse = false;
-
-/**
- * Draws a vertical dash onto the canvas at position (x, y).
- * @param {Number} x The x position of the dash on the canvas
- * @param {Number} y The y position of the dash on the canvas
- */
-function verticalDash(x, y) {
-    ctx.beginPath();
-    if (!isDarkmode) ctx.fillStyle = "lightgrey";
-    else ctx.fillStyle = "#444";
-    ctx.arc(x, y, dash.r, 0, Math.PI*2);
-    ctx.fillRect(x-dash.r, y, dash.r*2, dash.l);
-    ctx.arc(x, y+dash.l, dash.r, 0, Math.PI*2);
-    ctx.fill();
-}
-
-/**
- * Draws a horizontal dash onto the canvas at position (x, y).
- * @param {Number} x The x position of the dash on the canvas
- * @param {Number} y The y position of the dash on the canvas
- */
-function horizontalDash(x, y) {
-    ctx.beginPath();
-    if (!isDarkmode) ctx.fillStyle = "lightgrey";
-    else ctx.fillStyle = "#444";
-    ctx.arc(x, y, dash.r, 0, Math.PI*2);
-    ctx.fillRect(x, y-dash.r, dash.l, dash.r*2);
-    ctx.arc(x+dash.l, y, dash.r, 0, Math.PI*2);
-    ctx.fill();
-}
 
 /**
  * Gets the position of the mouse event on the canvas.
@@ -138,32 +100,6 @@ function getTouchPosition(e) {
         x: (touch.pageX - rect.left) * (c.width / rect.width),
         y: (touch.pageY - rect.top) * (c.height / rect.height)
     }
-}
-
-/**
- * Clears any user drawn content from the canvas.
- */
-function resetCanvas() {
-    ctx.clearRect(0, 0, c.width, c.height);
-    
-    for (let x = 0; x < c.width; x += 75) {
-        horizontalDash(x, c.height/2);
-    }
-
-    for (let y = 0; y < c.height; y += 75) {
-        verticalDash(c.width/2, y);
-    }
-
-    if (currentElem == "a") textToCanvas(currentList.a[listIndex])
-}
-
-/**
- * Adds the answer to the background of the canvas.
- * @param {String} text The answer to the current question 
- */
-function textToCanvas(text) {
-    ctx.font = "50vmin Arial";
-    ctx.fillText(text, 0, 400);
 }
 
 /**
@@ -342,43 +278,24 @@ document.addEventListener("keydown", e => {
 
 document.addEventListener("touchstart", e => {
     let pos = getTouchPosition(e);
-    ctx.beginPath();
-    ctx.lineWidth = 5;
-    ctx.lineCap = 'round';
-    if (!isDarkmode) ctx.strokeStyle = "black";
-    else ctx.strokeStyle = "white";
-    ctx.moveTo(pos.x, pos.y);
-    isTouch = true;
+    drawStart(pos);
 });
 
 document.addEventListener("touchmove", e => {
-    if (isTouch) {
-        let pos = getTouchPosition(e);
-        ctx.lineTo(pos.x, pos.y);
-        ctx.stroke();
-    }
-});
-
-document.addEventListener("touchend", e => {
-    isTouch = false
+    let pos = getTouchPosition(e);
+    draw(pos);
 });
 
 document.addEventListener("mousedown", e => {
     let pos = getMousePosition(e);
-    ctx.beginPath();
-    ctx.lineWidth = 5;
-    ctx.lineCap = 'round';
-    if (!isDarkmode) ctx.strokeStyle = "black";
-    else ctx.strokeStyle = "white";
-    ctx.moveTo(pos.x, pos.y);
+    drawStart(pos);
     isMouse = true;
 });
 
 document.addEventListener("mousemove", e => {
     if (isMouse) {
         let pos = getMousePosition(e);
-        ctx.lineTo(pos.x, pos.y);
-        ctx.stroke();
+        draw(pos);
     }
 });
 
