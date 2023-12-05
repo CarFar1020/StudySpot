@@ -1,6 +1,7 @@
 import { lists } from "./Modules/lists.js";
 import { popup, isPopup, togglePopup } from "./Modules/popup.js";
 import { c, textToCanvas, resetCanvas, drawStart, draw } from "./Modules/draw.js";
+import { weights, setWeights, changeWeights } from "./Modules/weights.js";
 
 const text = {
     alphabet: "Alphabet",
@@ -42,7 +43,7 @@ export var currentList = {
     a: null,
     q: null
 };
-var currentStr = {
+export var currentStr = {
     list: null,
     a: null,
     q: null
@@ -50,8 +51,6 @@ var currentStr = {
 
 export var listIndex;
 export var currentElem = '';
-
-var weights = {};
 
 export var isDarkmode = false;
 var isMouse = false;
@@ -123,16 +122,6 @@ export function setSelector(s, list) {
 }
 
 /**
- * Toggles the disabled attribute of the buttons w0, w1, w2, and w3.
- */
-function toggleWBtns() {
-    btn.w0.toggleAttribute("disabled");
-    btn.w1.toggleAttribute("disabled");
-    btn.w2.toggleAttribute("disabled");
-    btn.w3.toggleAttribute("disabled");
-}
-
-/**
  * Runs the relevant sequence of code depending on the value of currentElem.
  */
 function next() {
@@ -189,33 +178,6 @@ function loadList() {
 }
 
 /**
- * Loads the weights variable from local storage if it already exists. Otherwise, creates new weights with a base value of 10.
- */
-function setWeights() {
-    if (localStorage.getItem("Weights") !== null) load();
-    else {
-        weights = {};
-        for (var list in lists) {
-            weights[list] = [];
-            for (let i = 0; i < Object.values(lists[list])[0].length; i++) {
-                weights[list].push(10);
-            }
-        }
-        save();
-    }
-}
-
-/**
- * Changes the relevant weight based on the user's selection, saves the new weights to local storage, and moves to the next term.
- * @param {Number} w The factor to divide the current weight by
- */
-function changeWeights(w) {
-    weights[currentStr.list][listIndex] = Math.ceil(weights[currentStr.list][listIndex] / w);
-    save();
-    next();
-}
-
-/**
  * Toggles darkmode for each relevant element.
  */
 function toggleDarkMode() {
@@ -243,20 +205,6 @@ function toggleDarkMode() {
 function everythingSelected() {
     if (select.a.value != "" && select.q.value != "") btn.load.classList.remove("hide");
     else btn.load.classList.add("hide");
-}
-
-/**
- * Saves the weights variable to local storage.
- */
-function save() {
-    localStorage.setItem("Weights", JSON.stringify(weights));
-}
-
-/**
- * Gets the weights variable from local storage.
- */
-function load() {
-    weights = JSON.parse(localStorage.getItem("Weights"));
 }
 
 resetCanvas();
