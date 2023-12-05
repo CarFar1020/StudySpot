@@ -91,6 +91,18 @@ p {
     text-align: left;
 }
 
+.pInput {
+    margin-right: 1vmin;
+}
+
+.textInput {
+    outline: none;
+    border: 0.2vmin solid black;
+    border-radius: 0.5vmin;
+    height: 3vmin;
+    font-size: 2vmin;
+}
+
 .switch {
     position: relative;
     display: inline-block;
