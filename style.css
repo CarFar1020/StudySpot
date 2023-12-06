@@ -102,6 +102,10 @@ p {
     width: 5vmin;
 }
 
+#continue {
+    margin: 0;
+}
+
 .switch {
     position: relative;
     display: inline-block;

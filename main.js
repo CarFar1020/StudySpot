@@ -1,11 +1,10 @@
 import { lists, text } from "./Modules/lists.js";
-import { popup, overlay, isPopup, togglePopup } from "./Modules/popup.js";
+import { popup, overlay, buffers, isPopup, togglePopup } from "./Modules/popup.js";
 import { c, textToCanvas, resetCanvas, drawStart, draw } from "./Modules/draw.js";
 import { weights, setWeights, changeWeights, toggleWBtns } from "./Modules/weights.js";
 
 const body = document.getElementById("body");
 const QA = document.getElementById("QA");
-const textBox = document.getElementById("text");
 
 export const select = {
     list: document.getElementById("listSelect"),
@@ -15,6 +14,7 @@ export const select = {
 
 export const btn = {
     addList: document.getElementById("addList"),
+    continue: document.getElementById("continue"),
     load: document.getElementById("loadList"),
     next: document.getElementById("next"),
     setList: document.getElementById("setList"),
@@ -24,6 +24,12 @@ export const btn = {
     w1: document.getElementById("w1"),
     w2: document.getElementById("w2"),
     w3: document.getElementById("w3")
+};
+
+const textBox = {
+    name: document.getElementById("nameOfList"),
+    categories: document.getElementById("numCategories"),
+    terms: document.getElementById("numTerms")
 };
 
 const slider = {
@@ -174,7 +180,7 @@ function loadList() {
  * Toggles darkmode for each relevant element.
  */
 function toggleDarkMode() {
-    var elems = [body, popup, c, textBox];
+    var elems = [body, popup, c];
 
     for (let b in btn) {
         elems.push(btn[b]);
@@ -198,6 +204,34 @@ function toggleDarkMode() {
 function everythingSelected() {
     if (select.a.value != "" && select.q.value != "") btn.load.classList.remove("hide");
     else btn.load.classList.add("hide");
+}
+
+/**
+ * Description.
+ * @param {Number} cats  Number of categories
+ * @param {Number} terms Number of terms
+ */
+function continueList(cats, terms) {
+    buffers.add.classList.add("hide");
+    buffers.addContinue.classList.remove("hide");
+
+    for (let i = 1; i < cats+1; i++) {
+        var op = document.createElement("div");
+        op.classList.add("option")
+        var para = document.createElement("p");
+        para.classList.add("pInput");
+        para.appendChild(document.createTextNode("Category " + i + ":"));
+        var node = document.createElement("input");
+        node.setAttribute("type", "text");
+        node.classList.add("textInput");
+        op.appendChild(para);
+        op.appendChild(node);
+        buffers.addContinue.appendChild(op);
+        
+        for (let j = 0; j < terms; j++) {
+            
+        }
+    }
 }
 
 resetCanvas();
@@ -255,6 +289,7 @@ select.q.onchange = function(){ everythingSelected(); }
 select.a.onchange = function(){ everythingSelected(); }
 
 btn.addList.onclick = function() { togglePopup({add:true}); }
+btn.continue.onclick = function() { continueList(parseInt(textBox.categories.value), parseInt(textBox.terms.value)); }
 btn.load.onclick = function(){ loadList(); }
 btn.next.onclick = function(){ next(); };
 btn.setList.onclick = function(){ togglePopup({set:true}); }

@@ -32,13 +32,19 @@
             <div id="addListB" class="buffer hide">
                 <div class="option">
                     <p class="pInput">Name of List:</p>
-                    <input class="textInput" type="text">
+                    <input id="nameOfList" class="textInput" type="text">
+                </div>
+                <div class="option">
+                    <p class="pInput">Number of Categories:</p>
+                    <input id="numCategories" class="textInput short" type="text">
                 </div>
                 <div class="option">
                     <p class="pInput">Number of Terms:</p>
-                    <input class="textInput short" type="text">
+                    <input id="numTerms" class="textInput short" type="text">
                 </div>
+                <button id="continue" class="btn">Continue</button>
             </div>
+            <div id="continueAddListB" class="buffer hide"></div>
         </div>
         <div id="overlay" class="hide"></div>
         <div id="tool">
@@ -63,9 +69,6 @@
                         <button id="w3" class="btn" disabled>100% I Know It</button>
                     </div>
                 </div>
-            </div>
-            <div id="center">
-                <input type="text" id="text" class="hide" placeholder="Enter Answer If Relevant">
             </div>
             <div id="below">
                 <button id="next" class="below btn" disabled>Start</button>

@@ -4,8 +4,9 @@ import { lists } from "./lists.js";
 export const popup = document.getElementById("popup");
 export const overlay = document.getElementById("overlay");
 
-const buffers = {
+export const buffers = {
     add: document.getElementById("addListB"),
+    addContinue: document.getElementById("continueAddListB"),
     set: document.getElementById("setListB"),
     settings: document.getElementById("settingsB")
 };
@@ -52,6 +53,10 @@ export function togglePopup({add, set, settings} = {}) {
 
     for (let b in buffers) {
         buffers[b].classList.add("hide");
+    }
+
+    while (buffers.addContinue.firstChild) {
+        buffers.addContinue.removeChild(buffers.addContinue.firstChild);
     }
     
     if (set) setList();
