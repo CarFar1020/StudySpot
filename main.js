@@ -228,8 +228,20 @@ function continueList(cats, terms) {
         op.appendChild(node);
         buffers.addContinue.appendChild(op);
         
-        for (let j = 0; j < terms; j++) {
-            
+        for (let j = 1; j < terms+1; j++) {
+            var op = document.createElement("div");
+            op.classList.add("option")
+            var para = document.createElement("p");
+            para.classList.add("pInput");
+            para.classList.add("tab");
+            para.appendChild(document.createTextNode("Term " + j + ":"));
+            var node = document.createElement("input");
+            node.setAttribute("type", "text");
+            node.classList.add("textInput");
+            node.classList.add("medium");
+            op.appendChild(para);
+            op.appendChild(node);
+            buffers.addContinue.appendChild(op);
         }
     }
 }

@@ -15,6 +15,27 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+::-webkit-scrollbar {
+    position: absolute;
+    left: 0;
+    width: 2vmin;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 2vmin;
+    background-color: lightgrey;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    border-radius: 2vmin;
+    border: 0.3vmin solid lightgrey;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: grey;
+}
+
 .popup {
     position: absolute;
     padding: 2vmin;
@@ -26,6 +47,7 @@ body {
     border-radius: 2vmin;
     background-color: white;
     display: flex;
+    overflow-y: auto;
 }
 
 .buffer {
@@ -100,6 +122,14 @@ p {
 
 .short {
     width: 5vmin;
+}
+
+.medium {
+    width: 10vmin;
+}
+
+.tab {
+    margin-left: 2vmin;
 }
 
 #continue {
