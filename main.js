@@ -207,7 +207,32 @@ function everythingSelected() {
 }
 
 /**
- * Description.
+ * Creates an html paragraph element with class "pInput".
+ * @param {String} text            The text to add to the paragraph element
+ * @returns {HTMLParagraphElement} The paragraph element
+ */
+function createPara(text) {
+    var para = document.createElement("p");
+    para.classList.add("pInput");
+    para.appendChild(document.createTextNode(text));
+    return para;
+}
+
+/**
+ * Creates an html input element with type "text" and class "textInput".
+ * @param {Array} classes      Extra classes to be given to the textbox
+ * @returns {HTMLInputElement} The textbox element
+ */
+function createTextbox(classes = []) {
+    var node = document.createElement("input");
+    node.setAttribute("type", "text");
+    node.classList.add("textInput");
+    classes.forEach(c => { node.classList.add(c) });
+    return node;
+}
+
+/**
+ * Sets up the popup element with relevant info after user clicks "continue" in the "addList" popup.
  * @param {Number} cats  Number of categories
  * @param {Number} terms Number of terms
  */
@@ -218,32 +243,22 @@ function continueList(cats, terms) {
     for (let i = 1; i < cats+1; i++) {
         var op = document.createElement("div");
         op.classList.add("option")
-        var para = document.createElement("p");
-        para.classList.add("pInput");
-        para.appendChild(document.createTextNode("Category " + i + ":"));
-        var node = document.createElement("input");
-        node.setAttribute("type", "text");
-        node.classList.add("textInput");
-        op.appendChild(para);
-        op.appendChild(node);
+        op.appendChild(createPara("Category " + i + ":"));
+        op.appendChild(createTextbox());
         buffers.addContinue.appendChild(op);
         
         for (let j = 1; j < terms+1; j++) {
             var op = document.createElement("div");
             op.classList.add("option")
-            var para = document.createElement("p");
-            para.classList.add("pInput");
-            para.classList.add("tab");
-            para.appendChild(document.createTextNode("Term " + j + ":"));
-            var node = document.createElement("input");
-            node.setAttribute("type", "text");
-            node.classList.add("textInput");
-            node.classList.add("medium");
-            op.appendChild(para);
-            op.appendChild(node);
+            op.appendChild(createPara("Term " + j + ":"));
+            op.appendChild(createTextbox(["medium"]));
             buffers.addContinue.appendChild(op);
         }
     }
+    var b = document.createElement("button");
+    b.classList.add("btn");
+    b.appendChild(document.createTextNode("Create List"));
+    buffers.addContinue.appendChild(b);
 }
 
 resetCanvas();
