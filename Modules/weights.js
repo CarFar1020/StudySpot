@@ -31,6 +31,13 @@ export function setWeights() {
 }
 
 /**
+ * Removes the locally stored "Weights" variable from memory.
+ */
+export function removeWeights() {
+    localStorage.removeItem("Weights");
+}
+
+/**
  * Changes the relevant weight based on the user's selection, saves the new weights to local storage, and moves to the next term.
  * @param {Number} w The factor to divide the current weight by
  */

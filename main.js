@@ -1,7 +1,7 @@
 import { lists, text } from "./Modules/lists.js";
 import { popup, overlay, buffers, isPopup, togglePopup } from "./Modules/popup.js";
 import { c, textToCanvas, resetCanvas, drawStart, draw } from "./Modules/draw.js";
-import { weights, setWeights, changeWeights, toggleWBtns } from "./Modules/weights.js";
+import { weights, setWeights, changeWeights, removeWeights, toggleWBtns } from "./Modules/weights.js";
 
 const body = document.getElementById("body");
 const QA = document.getElementById("QA");
@@ -235,14 +235,16 @@ function createTextbox(classes = []) {
  * Sets up the popup element with relevant info after user clicks "continue" in the "addList" popup.
  * @param {Number} cats  Number of categories
  * @param {Number} terms Number of terms
+ * @param {String} name  The name of the new list
  */
-function continueList(cats, terms) {
+function continueList(cats, terms, name) {
     buffers.add.classList.add("hide");
     buffers.addContinue.classList.remove("hide");
 
     for (let i = 1; i < cats+1; i++) {
         var op = document.createElement("div");
         op.classList.add("option")
+        op.classList.add("cat")
         op.appendChild(createPara("Category " + i + ":"));
         op.appendChild(createTextbox());
         buffers.addContinue.appendChild(op);
@@ -258,7 +260,30 @@ function continueList(cats, terms) {
     var b = document.createElement("button");
     b.classList.add("btn");
     b.appendChild(document.createTextNode("Create List"));
+    b.onclick = function(){ addList(name); };
     buffers.addContinue.appendChild(b);
+}
+
+/**
+ * Adds all the user provided information to a new list.
+ * @param {String} name The name of the list
+ */
+function addList(name) {
+    lists[name] = {};
+    text[name] = name;
+    let currentName = ""
+    while (buffers.addContinue.firstChild && !(buffers.addContinue.firstChild.nodeName == "BUTTON")) {
+        let child = buffers.addContinue.firstChild;
+        if (child.classList.contains("cat")) {
+            lists[name][child.lastChild.value] = [];
+            currentName = child.lastChild.value;
+            text[currentName] = currentName;
+        } else lists[name][currentName].push(child.lastChild.value);
+        buffers.addContinue.removeChild(child);
+    }
+    removeWeights();
+    setWeights();
+    togglePopup();
 }
 
 resetCanvas();
@@ -316,7 +341,7 @@ select.q.onchange = function(){ everythingSelected(); }
 select.a.onchange = function(){ everythingSelected(); }
 
 btn.addList.onclick = function() { togglePopup({add:true}); }
-btn.continue.onclick = function() { continueList(parseInt(textBox.categories.value), parseInt(textBox.terms.value)); }
+btn.continue.onclick = function() { continueList(parseInt(textBox.categories.value), parseInt(textBox.terms.value), textBox.name.value); }
 btn.load.onclick = function(){ loadList(); }
 btn.next.onclick = function(){ next(); };
 btn.setList.onclick = function(){ togglePopup({set:true}); }
