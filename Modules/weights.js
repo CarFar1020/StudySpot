@@ -17,7 +17,7 @@ export function toggleWBtns() {
  * Loads the weights variable from local storage if it already exists. Otherwise, creates new weights with a base value of 10.
  */
 export function setWeights() {
-    if (localStorage.getItem("Weights") !== null) load();
+    if (localStorage.getItem("Weights") !== null) loadWeights();
     else {
         weights = {};
         for (var list in lists) {
@@ -26,7 +26,7 @@ export function setWeights() {
                 weights[list].push(10);
             }
         }
-        save();
+        saveWeights();
     }
 }
 
@@ -43,20 +43,20 @@ export function removeWeights() {
  */
 export function changeWeights(w) {
     weights[currentStr.list][listIndex] = Math.ceil(weights[currentStr.list][listIndex] / w);
-    save();
+    saveWeights();
     next();
 }
 
 /**
  * Saves the weights variable to local storage.
  */
-function save() {
+function saveWeights() {
     localStorage.setItem("Weights", JSON.stringify(weights));
 }
 
 /**
  * Gets the weights variable from local storage.
  */
-function load() {
+function loadWeights() {
     weights = JSON.parse(localStorage.getItem("Weights"));
 }
