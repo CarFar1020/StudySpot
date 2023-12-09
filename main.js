@@ -283,6 +283,7 @@ function addList(name) {
         } else lists[name][currentName].push(child.lastChild.value);
         buffers.addContinue.removeChild(child);
     }
+    saveLists();
     removeWeights();
     setWeights();
     togglePopup();
@@ -302,8 +303,24 @@ function changeTool(value) {
     }
 }
 
+/**
+ * Saves the lists constant to local storage.
+ */
+function saveLists() {
+    localStorage.setItem("Lists", JSON.stringify(lists));
+}
+
+/**
+ * Gets the lists constant from local storage.
+ */
+function loadLists() {
+    if (localStorage.getItem("Lists") !== null) lists = JSON.parse(localStorage.getItem("Lists"));
+    else saveLists();
+}
+
 resetCanvas();
 setWeights();
+loadLists();
 
 document.addEventListener("keydown", e => {
     switch (e.key) {

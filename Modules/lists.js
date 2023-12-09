@@ -1,4 +1,4 @@
-export const lists = {
+export var lists = {
     APkanji: {
         kanji: [
             "悪", "安", "暗", "以", "意", "医", "育", "一", "員", "引", // 10
@@ -168,7 +168,7 @@ export const lists = {
     }
 };
 
-export const text = {
+export var text = {
     alphabet: "Alphabet",
     APkanji: "AP Kanji",
     hiragana: "Hiragana",
