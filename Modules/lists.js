@@ -178,3 +178,18 @@ export var text = {
     meaning: "Meaning",
     romaji: "Romaji"
 };
+
+/**
+ * Saves the lists constant to local storage.
+ */
+export function saveLists() {
+    localStorage.setItem("Lists", JSON.stringify(lists));
+}
+
+/**
+ * Gets the lists constant from local storage.
+ */
+export function loadLists() {
+    if (localStorage.getItem("Lists") !== null) lists = JSON.parse(localStorage.getItem("Lists"));
+    else saveLists();
+}

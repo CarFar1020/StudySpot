@@ -1,4 +1,4 @@
-import { lists, text } from "./Modules/lists.js";
+import { lists, text, saveLists, loadLists } from "./Modules/lists.js";
 import { popup, overlay, buffers, isPopup, togglePopup } from "./Modules/popup.js";
 import { c, textToCanvas, resetCanvas, drawStart, draw } from "./Modules/draw.js";
 import { weights, setWeights, changeWeights, removeWeights, toggleWBtns } from "./Modules/weights.js";
@@ -301,21 +301,6 @@ function changeTool(value) {
         c.classList.add("hide");
         textBox.textTool.classList.remove("hide");
     }
-}
-
-/**
- * Saves the lists constant to local storage.
- */
-function saveLists() {
-    localStorage.setItem("Lists", JSON.stringify(lists));
-}
-
-/**
- * Gets the lists constant from local storage.
- */
-function loadLists() {
-    if (localStorage.getItem("Lists") !== null) lists = JSON.parse(localStorage.getItem("Lists"));
-    else saveLists();
 }
 
 resetCanvas();
