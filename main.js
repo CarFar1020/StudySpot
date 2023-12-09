@@ -288,6 +288,10 @@ function addList(name) {
     togglePopup();
 }
 
+/**
+ * Changes the center tool when user changes it in settings.
+ * @param {String} value The value of the tool selector
+ */
 function changeTool(value) {
     if (value == "Canvas") {
         c.classList.remove("hide");
