@@ -288,6 +288,16 @@ function addList(name) {
     togglePopup();
 }
 
+function changeTool(value) {
+    if (value == "Canvas") {
+        c.classList.remove("hide");
+        textBox.textTool.classList.add("hide");
+    } else if (value == "Textbox") {
+        c.classList.add("hide");
+        textBox.textTool.classList.remove("hide");
+    }
+}
+
 resetCanvas();
 setWeights();
 
@@ -333,7 +343,7 @@ document.addEventListener("mouseup", e => {
     isMouse = false
 });
 
-select.textbox.onchange = function(){ c.classList.add("hide"); textBox.textTool.classList.remove("hide"); }
+select.textbox.onchange = function(){ changeTool(select.textbox.value); }
 select.list.addEventListener("change", e => {
     setSelector(select.q, lists[select.list.value]);
     setSelector(select.a, lists[select.list.value]);
