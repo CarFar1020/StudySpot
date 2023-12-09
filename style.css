@@ -245,11 +245,11 @@ button:hover {
     height: 10vmin;
 }
 
-#reset {
+.danger {
     background: #FF0000;
 }
 
-#reset:hover {
+.danger:hover {
     background: #CC0000;
 }
 
@@ -275,6 +275,10 @@ img {
     color: white;
 }
 
+textarea.darkmode {
+    background-color: #222;
+}
+
 .btn.darkmode:hover {
     background-color: #333;
 }
@@ -293,12 +297,12 @@ img {
     background-color: #222;
 }
 
-#reset.darkmode {
-    background-color: #880000;
+.danger.darkmode {
+    background-color: #AA0000;
 }
 
-#reset.darkmode:hover {
-    background-color: #BB0000;
+.danger.darkmode:hover {
+    background-color: #CC0000;
 }
 
 .hide {

@@ -192,6 +192,10 @@ function toggleDarkMode() {
         elems.push(select[s]);
     }
 
+    for (let t in textBox) {
+        elems.push(textBox[t]);
+    }
+
     elems.forEach(elem => {
         elem.classList.toggle("darkmode");
     });
@@ -229,6 +233,7 @@ function createTextbox(classes = []) {
     var node = document.createElement("input");
     node.setAttribute("type", "text");
     node.classList.add("textInput");
+    if (isDarkmode) node.classList.add("darkmode");
     classes.forEach(c => { node.classList.add(c) });
     return node;
 }
@@ -263,6 +268,7 @@ function continueList(cats, terms, name) {
         }
         var b = document.createElement("button");
         b.classList.add("btn");
+        if (isDarkmode) b.classList.add("darkmode");
         b.appendChild(document.createTextNode("Create List"));
         b.onclick = function(){ addList(name); }
         buffers.addContinue.appendChild(b);
