@@ -240,30 +240,33 @@ function createTextbox(classes = []) {
  * @param {String} name  The name of the new list
  */
 function continueList(cats, terms, name) {
-    buffers.add.classList.add("hide");
-    buffers.addContinue.classList.remove("hide");
+    if (cats < 1 || terms < 1) alert("Please enter valid numbers") 
+    else {
+        buffers.add.classList.add("hide");
+        buffers.addContinue.classList.remove("hide");
 
-    for (let i = 1; i < cats+1; i++) {
-        var op = document.createElement("div");
-        op.classList.add("option")
-        op.classList.add("cat")
-        op.appendChild(createPara("Category " + i + ":"));
-        op.appendChild(createTextbox());
-        buffers.addContinue.appendChild(op);
-        
-        for (let j = 1; j < terms+1; j++) {
+        for (let i = 1; i < cats+1; i++) {
             var op = document.createElement("div");
             op.classList.add("option")
-            op.appendChild(createPara("Term " + j + ":"));
-            op.appendChild(createTextbox(["medium"]));
+            op.classList.add("cat")
+            op.appendChild(createPara("Category " + i + ":"));
+            op.appendChild(createTextbox());
             buffers.addContinue.appendChild(op);
+            
+            for (let j = 1; j < terms+1; j++) {
+                var op = document.createElement("div");
+                op.classList.add("option")
+                op.appendChild(createPara("Term " + j + ":"));
+                op.appendChild(createTextbox(["medium"]));
+                buffers.addContinue.appendChild(op);
+            }
         }
+        var b = document.createElement("button");
+        b.classList.add("btn");
+        b.appendChild(document.createTextNode("Create List"));
+        b.onclick = function(){ addList(name); }
+        buffers.addContinue.appendChild(b);
     }
-    var b = document.createElement("button");
-    b.classList.add("btn");
-    b.appendChild(document.createTextNode("Create List"));
-    b.onclick = function(){ addList(name); }
-    buffers.addContinue.appendChild(b);
 }
 
 /**
@@ -360,7 +363,7 @@ select.q.onchange = function(){ everythingSelected(); }
 select.a.onchange = function(){ everythingSelected(); }
 
 btn.addList.onclick = function() { togglePopup({add:true}); }
-btn.continue.onclick = function() { continueList(parseInt(textBox.categories.value), parseInt(textBox.terms.value), textBox.name.value); }
+btn.continue.onclick = function() { continueList(parseInt(textBox.categories.value) || 0, parseInt(textBox.terms.value) || 0, textBox.name.value); }
 btn.load.onclick = function(){ loadList(); }
 btn.next.onclick = function(){ next(); };
 btn.setList.onclick = function(){ togglePopup({set:true}); }
