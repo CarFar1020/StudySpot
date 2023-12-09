@@ -28,6 +28,10 @@
                         <span class="slider"></span>
                     </label>
                 </div>
+                <select id="toolSelect" class="select">
+                    <option value="Canvas" selected>Drawing Canvas</option>
+                    <option value="Textbox">Textbox</option>
+                </select>
             </div>
             <div id="addListB" class="buffer hide">
                 <div class="option">
@@ -61,6 +65,7 @@
                     </div>
                 </div>
                 <canvas id="canvas" width="500" height="500"></canvas>
+                <textarea id="textTool" class="textInput hide" cols="30" rows="10"></textarea>
                 <div id="right">
                     <div class="buffer">
                         <button id="w0" class="btn" disabled>I Have No Idea</button>

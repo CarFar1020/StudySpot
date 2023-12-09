@@ -13,6 +13,7 @@ body {
     height: 100vh;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 2vmin;
 }
 
 ::-webkit-scrollbar {
@@ -61,7 +62,7 @@ body {
     border: none;
     width: 30vmin;
     height: 5vmin;
-    font-weight: bold;
+    font-size: 2vmin;
 }
 
 select:hover {
@@ -98,10 +99,6 @@ select:hover {
     align-items: center;
 }
 
-p {
-    font-size: 2vmin;
-}
-
 .pOption {
     width: 50vmin;
     text-align: left;
@@ -130,6 +127,11 @@ p {
 
 .tab {
     margin-left: 2vmin;
+}
+
+#textTool {
+    height: 25vmin;
+    width: 25vmin;
 }
 
 #continue {

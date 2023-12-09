@@ -25,7 +25,8 @@ function addList() {
  */
 function setList() {
     buffers.set.classList.remove("hide");
-    for (let s in select) select[s].classList.add("hide");
+    select.q.classList.add("hide");
+    select.a.classList.add("hide");
     btn.load.classList.add("hide");
     setSelector(select.list, lists);
 }

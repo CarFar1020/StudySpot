@@ -7,6 +7,7 @@ const body = document.getElementById("body");
 const QA = document.getElementById("QA");
 
 export const select = {
+    textbox: document.getElementById("toolSelect"),
     list: document.getElementById("listSelect"),
     q: document.getElementById("questionSelect"),
     a: document.getElementById("answerSelect")
@@ -27,6 +28,7 @@ export const btn = {
 };
 
 const textBox = {
+    textTool: document.getElementById("textTool"),
     name: document.getElementById("nameOfList"),
     categories: document.getElementById("numCategories"),
     terms: document.getElementById("numTerms")
@@ -260,7 +262,7 @@ function continueList(cats, terms, name) {
     var b = document.createElement("button");
     b.classList.add("btn");
     b.appendChild(document.createTextNode("Create List"));
-    b.onclick = function(){ addList(name); };
+    b.onclick = function(){ addList(name); }
     buffers.addContinue.appendChild(b);
 }
 
@@ -331,6 +333,7 @@ document.addEventListener("mouseup", e => {
     isMouse = false
 });
 
+select.textbox.onchange = function(){ c.classList.add("hide"); textBox.textTool.classList.remove("hide"); }
 select.list.addEventListener("change", e => {
     setSelector(select.q, lists[select.list.value]);
     setSelector(select.a, lists[select.list.value]);
