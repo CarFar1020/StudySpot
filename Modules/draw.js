@@ -30,10 +30,12 @@ export function resetCanvas() {
  * @param {String} text The answer to the current question 
  */
 export function textToCanvas(text) {
+    ctx.save();
     if (text.length == 1) {
         ctx.font = "50vmin Arial";
         ctx.fillText(text, 0, 400);
     }
+    ctx.restore();
 }
 
 export function drawStart(pos) {

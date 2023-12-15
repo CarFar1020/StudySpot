@@ -196,6 +196,14 @@ h2 {
     display: grid;
 }
 
+.background {
+    display: absolute;
+    width: 25.5vmin;
+    height: 25.5vmin;
+    background-color: black;
+
+}
+
 canvas {
     width: 25vmin;
     height: 25vmin;
