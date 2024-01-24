@@ -1,6 +1,6 @@
 export var lists = {
-    APkanji: {
-        kanji: [
+    "AP Kanji": {
+        "Kanji": [
             "悪", "安", "暗", "以", "意", "医", "育", "一", "員", "引", // 10
             "飲", "院", "右", "雨", "運", "映", "泳", "英", "駅", "円", // 20
             "園", "遠", "横", "屋", "温", "音", "下", "化", "何", "夏", // 30
@@ -43,7 +43,7 @@ export var lists = {
             "用", "要", "来", "絡", "落", "利", "理", "立", "留", "旅", // 400
             "両", "料", "力", "林", "冷", "礼", "練", "六", "和", "話", // 410
         ],
-        meaning: [
+        "Meaning": [
             "Bad", "Cheap, Peaceful", "Dark", "to the ~ of", "Meaning, Mind",
             "Medical", "To Raise", "One", "Member", "To Pull", // 10
             "To Drink", "Institute", "Right (Side)", "Rain", "To Carry, Luck",
@@ -128,8 +128,8 @@ export var lists = {
             "Gratitude, Paper Bills", "To Train", "Six", "Harmony, Japanese", "To Talk", // 410
         ]
     },
-    alphabet: {
-        hiragana: [
+    "Alphabet": {
+        "Hiragana": [
             "あ", "い", "う", "え", "お",
             "か", "き", "く", "け", "こ",
             "さ", "し", "す", "せ", "そ",
@@ -141,7 +141,7 @@ export var lists = {
             "ら", "り", "る", "れ", "ろ",
             "わ", "を", "ん"
         ],
-        katakana: [
+        "Katakana": [
             "ア", "イ", "ウ", "エ", "オ",
             "カ", "キ", "ク", "ケ", "コ",
             "サ", "シ", "ス", "セ", "ソ",
@@ -153,7 +153,7 @@ export var lists = {
             "ラ", "リ", "ル", "レ", "ロ",
             "ワ", "ヲ", "ン"
         ],
-        romaji: [
+        "Romaji": [
             "a", "i", "u", "e", "o",
             "ka", "ki", "ku", "ke", "ko",
             "sa", "shi", "su", "se", "so",
@@ -166,17 +166,6 @@ export var lists = {
             "wa", "wo", "n"
         ]
     }
-};
-
-export var text = {
-    alphabet: "Alphabet",
-    APkanji: "AP Kanji",
-    hiragana: "Hiragana",
-    japanese: "Japanese",
-    kanji: "Kanji",
-    katakana: "Katakana",
-    meaning: "Meaning",
-    romaji: "Romaji"
 };
 
 /**

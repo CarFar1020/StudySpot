@@ -1,4 +1,4 @@
-import { lists, text, saveLists, loadLists } from "./Modules/lists.js";
+import { lists, saveLists, loadLists } from "./Modules/lists.js";
 import { popup, overlay, buffers, isPopup, togglePopup } from "./Modules/popup.js";
 import { c, textToCanvas, resetCanvas, drawStart, draw } from "./Modules/draw.js";
 import { weights, setWeights, changeWeights, removeWeights, toggleWBtns } from "./Modules/weights.js";
@@ -115,7 +115,7 @@ export function setSelector(s, list) {
 
     for (var obj in list) {
         let option = document.createElement("option");
-        let node = document.createTextNode(text[obj]);
+        let node = document.createTextNode(obj);
         option.value = obj;
         option.appendChild(node);
         s.appendChild(option);
@@ -174,7 +174,7 @@ function loadList() {
     btn.next.removeAttribute("disabled");
     btn.next.innerHTML = "Start";
 
-    QA.innerHTML = "New List: " + text[currentStr.list] + " - " + text[currentStr.q] + " to " + text[currentStr.a];
+    QA.innerHTML = "New List: " + currentStr.list + " - " + currentStr.q + " to " + currentStr.a;
     togglePopup();
 }
 
@@ -281,14 +281,12 @@ function continueList(cats, terms, name) {
  */
 function addList(name) {
     lists[name] = {};
-    text[name] = name;
     let currentName = ""
     while (buffers.addContinue.firstChild && !(buffers.addContinue.firstChild.nodeName == "BUTTON")) {
         let child = buffers.addContinue.firstChild;
         if (child.classList.contains("cat")) {
             lists[name][child.lastChild.value] = [];
             currentName = child.lastChild.value;
-            text[currentName] = currentName;
         } else lists[name][currentName].push(child.lastChild.value);
         buffers.addContinue.removeChild(child);
     }
