@@ -30,16 +30,19 @@ export function resetCanvas() {
  * @param {String} text The answer to the current question 
  */
 export function textToCanvas(text) {
-    ctx.save();
     if (text.length == 1) {
+        ctx.beginPath();
+        ctx.globalCompositeOperation = 'destination-over';
+        ctx.textAlign = "center";
         ctx.font = "50vmin Arial";
-        ctx.fillText(text, 0, 400);
+        ctx.strokeSytle = "#EEEEEE";
+        ctx.fillText(text, c.width/2, c.height*5/6);
     }
-    ctx.restore();
 }
 
 export function drawStart(pos) {
     ctx.beginPath();
+    ctx.globalCompositeOperation = 'source-over';
     ctx.lineWidth = 10;
     ctx.lineCap = 'round';
     if (!isDarkmode) ctx.strokeStyle = "black";
@@ -59,6 +62,7 @@ export function draw(pos) {
  */
 function horizontalDash(x, y) {
     ctx.beginPath();
+    ctx.globalCompositeOperation = 'destination-over';
     if (!isDarkmode) ctx.fillStyle = "lightgrey";
     else ctx.fillStyle = "#444";
     ctx.arc(x, y, dash.r, 0, Math.PI*2);
@@ -74,6 +78,7 @@ function horizontalDash(x, y) {
  */
 function verticalDash(x, y) {
     ctx.beginPath();
+    ctx.globalCompositeOperation = 'destination-over';
     if (!isDarkmode) ctx.fillStyle = "lightgrey";
     else ctx.fillStyle = "#444";
     ctx.arc(x, y, dash.r, 0, Math.PI*2);
