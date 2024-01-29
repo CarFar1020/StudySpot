@@ -48,35 +48,35 @@ export var lists = {
             "Medical", "To Raise", "One", "Member", "To Pull", // 10
             "To Drink", "Institute", "Right (Side)", "Rain", "To Carry, Luck",
             "To Project", "To Swim", "British, Brave", "Station", "Circle, Yen", // 20
-            "Garden", "Far", "Side", "Store, Roof", "Warm",
-            "Sound", "Under", "To Change", "What", "Summer", // 30
+            "Garden, Park", "Far", "Side, Beside", "Store, Roof", "Warm",
+            "Sound", "Under", "To Change, Transform", "What", "Summer", // 30
             "House, Person", "Subject", "Song", "Fire", "Flower",
-            "Luggage", "Picture, Stroke", "To Meet", "-Time(s) (Counting)", "Sea, Ocean, Beach", // 40
+            "Luggage", "Picture, Stroke", "To Meet", "-time(s) (Counting)", "Sea, Ocean, Beach", // 40
             "Boundary", "Everyone", "Painting", "To Open", "Floor", 
-            "Outside", "To Learn", "Enjoyable", "Active, Live", "Cold", // 50
-            "Chinese", "Interval, Space", "Barrier", "Building", "Face", 
+            "Outside", "To Learn or Study, School", "Enjoyable", "Active, Live", "Cold Weather", // 50
+            "Chinese", "Interval, Space", "Barrier", "Building", "One's Face", 
             "Wish", "Term", "Machine", "To Return", "Spirit", // 60
             "To Mark", "To Wake Up", "To Rest", "To Hurry", "To Cry", 
-            "To Investigate", "Cow", "To Leave", "Fish", "Capital", // 70
+            "To Investigate", "Cow", "To Leave or Pass", "Fish", "Capital, Ten Quadrillion", // 70
             "Strong", "To Teach", "Bridge", "Work, Business", "Office", 
             "Near", "Gold, Money", "Nine", "Sky", "In Charge", // 80
             "Older Brother", "Shape", "To Pass Through", "To Measure", "To Decide", 
             "To Tie", "Moon, Month", "Dog", "To See, To Look, To Watch", "Testing", // 90
             "Original", "To Appear", "To Say", "Individual", "Old", 
-            "Five", "Relative To Noon", "After", "To Talk", "Public", // 100
-            "Mouth", "To Face", "Like", "Industrial", "Wide", 
-            "School", "Harbor", "To Think", "To Go", "To Fall, To Get Off", // 110
+            "Five", "Relative To Noon", "After", "To Talk, Word, Language", "Public", // 100
+            "Mouth", "To Face Towards", "Like", "Industrial", "Wide", 
+            "School", "Harbor", "To Think, Thought", "To Go", "To Fall, To Get Off", // 110
             "Tall, Expensive", "#", "To Match", "Country", "Black", 
             "Now", "To Be Troubled", "Marriage", "Left", "Most", // 120
-            "Age, -Years Old", "Festival", "Edge", "To Make", "Last, Preceding", 
-            "Miscellaneous", "Three", "Mountain", "To Leave", "To Serve", // 130
+            "Age, -years Old", "Festival", "Edge", "To Make", "Last, Preceding", 
+            "Miscellaneous", "Three", "Mountain", "To Leave or Remain", "To Serve", // 130
             "To Use", "Four", "To Begin", "Older Sister", "Child", 
-            "City", "To Think", "Finger", "To Stop", "I, Private", // 140
+            "City", "To Think, Opinion", "Finger", "To Stop Moving", "I, Private", // 140
             "Paper", "To Try", "Matter", "Character", "Temple", 
             "To Hold", "Time", "Next", "To Treat", "Self", // 150
             "Word", "Ceremony", "Seven", "To Lose", "Room", 
-            "Truth", "To Copy", "Company", "Person", "Car", // 160
-            "Young", "Main", "To Take", "Hand, Person", "Alcohol", 
+            "Truth", "To Copy", "Company", "Person, -er", "Car", // 160
+            "Young", "Main, Head of Household", "To Take", "Hand, Person", "Alcohol", 
             "To Receive (Often Hurtful)", "To Receive (From Superior)", "State", "Autumn", "To End", // 170
             "To Learn", "Week", "To Gather, To Collect", "To Live (At)", "Ten", 
             "Heavy", "Inn", "To Go Out", "Art", "Spring", // 180
@@ -84,48 +84,48 @@ export var lists = {
             "Commercial", "Small", "Few", "To Smile, To Laugh", "Top", // 190
             "To Ride", "Place (Space)", "Color", "To Eat", "To Trust", 
             "To Sleep", "Heart", "New", "Forest", "God", // 200
-            "Parent", "Body", "To Go Forward", "Person", "Chart", 
+            "Parent", "One's Body, Meat", "To Go Forward", "Person, Somebody, -ian", "Chart", 
             "Water", "Number, To Count", "World", "System", "To Become", // 210
             "Clear Sky", "Correct", "To Be Born", "West", "Blue", 
             "Quiet", "Long Ago", "Rock, Stone", "Red", "To Cut", // 220
             "To Connect", "Node, Joint", "To Explain", "Snow", "First", 
             "Thousand", "Exclusive", "River", "To Wash", "Line", // 230
-            "To Choose", "Before, Front", "Be As Is", "Whole", "Group", 
+            "To Choose", "Before, Front", "Be As Is", "Whole", "Group, Class", 
             "Early", "Mutually", "To Run", "To Send", "To Present", // 240
-            "Side", "Foot, Enough", "Fast", "Group", "To Continue", 
+            "Side, -side", "Foot, Enough", "Fast", "Group, Family", "To Continue", 
             "To Graduate", "Village", "Many", "Fat", "To Hit", // 250
-            "Body", "Vs.", "To Wait", "To Lend", "Step", 
+            "Body, Torso", "Vs.", "To Wait", "To Lend", "Step", 
             "Big", "Ordinal", "Title", "Plural, Skilled", "Single", // 260
             "Short", "Male", "To Know", "Land, Ground", "Pond", 
-            "To Put", "To Be Late", "Tea", "To Wear, To Arrive", "Inside", // 270
+            "To Put", "To Be Late", "Tea", "To Wear, To Arrive", "Middle, Inside, Through", // 270
             "Noon", "To Pour", "Morning", "Town", "To Check", 
             "Long, Head", "Bird", "Painful", "To Go Through, Commute", "Low", // 280
-            "Fixed", "Garden", "Younger Brother", "-Like, Target", "Heaven", 
+            "Fixed", "Garden, Yard", "Younger Brother", "-like, Target", "Heaven", 
             "Store", "To Roll", "Point", "To Convey", "Rice Field", // 290
-            "Electricity", "To Climb", "Capital", "-Time(s) (Temperature Or Small Numbers", "Soil", 
+            "Electricity", "To Climb", "A Capital", "-time(s) (Temperature Or Small Numbers", "Soil", 
             "Winter", "Island", "East", "Answer", "Head", // 300
             "To Work", "To Move", "Same", "Road, Way", "Special", 
             "To Read", "Inside", "South", "Difficult", "Two", // 310
             "Meat", "Day", "To Enter", "Hot, Fever", "Year", 
             "Back", "To Deliver", "To Buy", "To Sell", "White", // 320
             "Eight", "To Depart", "Half", "Against", "Cooked Rice", 
-            "Evening", "Number", "Non-", "To Fly, To Jump", "Beautiful", // 330
+            "Night, Evening", "Number", "Non-", "To Fly, To Jump", "Beautiful", // 330
             "Nose", "Necessary", "Hundred", "Ice", "Front, Chart", 
             "Illness", "Item", "Un-", "Attach", "Man, (Own) Husband", // 340
             "Married Woman", "Father", "Part", "Wind", "Cloth", 
             "To Pay", "Thing (Tangible)", "To Understand, To Divide", "Sentence", "To Listen", // 350
-            "Flat, Peace", "To Separate", "To Change", "Convenient", "To Study", 
+            "Flat, Peace", "To Separate", "To Change, Strange", "Convenient", "To Study", 
             "To Walk", "Mother", "Person, Way Of Doing, Side", "Law", "To Forget", // 360
-            "Busy", "North", "Origin, Book", "Younger Sister", "-Sheet(s)", 
+            "Busy", "North", "Origin, Book", "Younger Sister", "-sheet(s)", 
             "Every", "End", "Ten Thousand", "Taste", "Not Yet", // 370
-            "Nothing", "Name", "Bright", "Face", "Tree", 
+            "Nothing", "Name", "Bright", "Face, Mask", "Tree", 
             "Eye", "To Ask", "Gate", "Night", "Field", // 380
-            "Medicine", "Friend", "To Have", "Reason", "To Play", 
+            "Medicine", "Friend", "To Have", "Reason, Significance", "To Play", 
             "Evening", "Pre", "Day Of Week", "Mr., Mrs., Manner", "Ocean", // 390
-            "Task, Use", "Main", "To Come", "Linkage", "To Fall, To Drop", 
-            "Advantage", "Reason", "To Stand", "To Stop", "Travel", // 400
-            "Both", "Material, Fee", "Power", "Forest", "Cold", 
-            "Gratitude, Paper Bills", "To Train", "Six", "Harmony, Japanese", "To Talk", // 410
+            "Task, Use", "Main, Vital, To Need", "To Come", "Linkage", "To Fall, To Drop", 
+            "Advantage", "Logic, Reason", "To Stand", "To Stop or Stay, Russian Ruble", "Travel", // 400
+            "Both", "Material, Fee", "Power", "Wood, Woods", "Cold to the Touch, Refrigerate", 
+            "Gratitude, Paper Bills", "To Train", "Six", "Harmony, Japanese", "To Talk or Chat", // 410
         ]
     },
     "Alphabet": {
