@@ -91,8 +91,8 @@ export var lists = {
             "To Connect", "Node, Joint", "To Explain", "Snow", "First", 
             "Thousand", "Exclusive", "River", "To Wash", "Line", // 230
             "To Choose", "Before, Front", "Be As Is", "Whole", "Group, Class", 
-            "Early", "Mutually", "To Run", "To Send", "To Present", // 240
-            "Side, -side", "Foot, Enough", "Fast", "Group, Family", "To Continue", 
+            "Fast, Early", "Mutually", "To Run", "To Send", "To Present", // 240
+            "Side, -side", "Foot, Enough", "Fast, Gear", "Group, Family", "To Continue", 
             "To Graduate", "Village", "Many", "Fat", "To Hit", // 250
             "Body, Torso", "Vs.", "To Wait", "To Lend", "Step", 
             "Big", "Ordinal", "Title", "Plural, Skilled", "Single", // 260
