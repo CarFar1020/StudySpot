@@ -3,6 +3,8 @@ import { popup, overlay, buffers, isPopup, togglePopup } from "./Modules/popup.j
 import { c, textToCanvas, resetCanvas, drawStart, draw } from "./Modules/draw.js";
 import { weights, setWeights, changeWeights, removeWeights, toggleWBtns } from "./Modules/weights.js";
 
+const VERSION = "1.0.0";
+
 const body = document.getElementById("body");
 const QA = document.getElementById("QA");
 
@@ -310,6 +312,24 @@ function changeTool(value) {
     }
 }
 
+/**
+ * Changes the current version of the clients program if they do not have the most current release.
+ * @param {String} v The version to change to
+ */
+function changeVersion(v) {
+    if (localStorage.getItem("Version") != VERSION) {
+        let response = confirm("You do not seem to have the most updated version. We recommend that you update by selecting OK.\n(Your current lists and weights will be reset)");
+        if (response) {
+            if (localStorage.getItem("Version") == null) {
+                localStorage.removeItem("Lists");
+                localStorage.removeItem("Weights");
+            }
+            localStorage.setItem("Version", VERSION);
+        }
+    }
+}
+
+changeVersion(VERSION);
 resetCanvas();
 setWeights();
 loadLists();
