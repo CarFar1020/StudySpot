@@ -21,6 +21,7 @@ export const btn = {
     load: document.getElementById("loadList"),
     next: document.getElementById("next"),
     setList: document.getElementById("setList"),
+    info: document.getElementById("info"),
     reset: document.getElementById("reset"),
     settings: document.getElementById("settings"),
     w0: document.getElementById("w0"),
@@ -398,6 +399,7 @@ document.addEventListener("mouseup", e => {
 
 select.textbox.onchange = function(){ changeTool(select.textbox.value); }
 select.list.addEventListener("change", e => {
+    btn.info.classList.remove("hide");
     setSelector(select.q, lists[select.list.value]);
     setSelector(select.a, lists[select.list.value]);
     option.range.classList.remove("hide");
@@ -410,8 +412,9 @@ select.a.onchange = function(){ everythingSelected(); }
 btn.addList.onclick = function() { togglePopup({add:true}); }
 btn.continue.onclick = function() { continueList(parseInt(textBox.categories.value) || 0, parseInt(textBox.terms.value) || 0, textBox.name.value); }
 btn.load.onclick = function(){ loadList(); }
-btn.next.onclick = function(){ next(); };
+btn.next.onclick = function(){ next(); }
 btn.setList.onclick = function(){ togglePopup({set:true}); }
+btn.info.onclick = function(){  }
 btn.reset.onclick = function(){ resetCanvas(); }
 btn.settings.onclick = function() { togglePopup({settings:true}); }
 btn.w0.onclick = function(){ changeWeights(0.5); }

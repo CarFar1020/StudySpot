@@ -248,6 +248,19 @@ button:hover {
     background: #DDD;
 }
 
+#infoIcon {
+    width: 2vmin;
+    height: 2vmin;
+}
+
+#info:hover {
+    background-color: white;
+}
+
+#info.darkmode {
+    background-color: #222;
+}
+
 #settings:hover {
     background-color: white;
     animation-name: spin;
