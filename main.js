@@ -183,7 +183,7 @@ function loadList() {
     let rangeLow = textBox.rangeLow.value;
     let rangeHigh = textBox.rangeHigh.value;
     maxIndex = currentList.q.length;
-    if (rangeLow != null && rangeHigh != null) {
+    if (rangeLow != "" && rangeHigh != "") {
         maxIndex = rangeHigh - rangeLow;
         currentList.q = currentList.q.slice(rangeLow-1, rangeHigh);
         currentList.a = currentList.a.slice(rangeLow-1, rangeHigh);
