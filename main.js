@@ -47,6 +47,10 @@ const slider = {
     darkmode: document.getElementById("darkmodeSlider")
 };
 
+const check = {
+    darkmode: document.getElementById("darkmodeCheck")
+}
+
 export var currentList = {
     a: null,
     q: null
@@ -219,6 +223,7 @@ function toggleDarkMode() {
     });
     if (isDarkmode) isDarkmode = false;
     else isDarkmode = true;
+    localStorage.setItem("Darkmode", isDarkmode);
     resetCanvas()
 }
 
@@ -350,6 +355,13 @@ function changeVersion(v) {
     }
 }
 
+function loadSettings() {
+    if (localStorage.getItem("Darkmode")) {
+        toggleDarkMode();
+        check.darkmode.checked = true;
+    }
+}
+
 /**
  * Displays info about the current selected list.
  * @param {String} list The name of the list
@@ -362,6 +374,7 @@ changeVersion(VERSION);
 resetCanvas();
 setWeights();
 loadLists();
+loadSettings();
 
 document.addEventListener("keydown", e => {
     switch (e.key) {
