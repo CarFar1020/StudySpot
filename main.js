@@ -350,6 +350,14 @@ function changeVersion(v) {
     }
 }
 
+/**
+ * Displays info about the current selected list.
+ * @param {String} list The name of the list
+ */
+function listInfo(list) {
+
+}
+
 changeVersion(VERSION);
 resetCanvas();
 setWeights();
@@ -414,7 +422,7 @@ btn.continue.onclick = function() { continueList(parseInt(textBox.categories.val
 btn.load.onclick = function(){ loadList(); }
 btn.next.onclick = function(){ next(); }
 btn.setList.onclick = function(){ togglePopup({set:true}); }
-btn.info.onclick = function(){  }
+btn.info.onclick = function(){ listInfo(currentStr.list); }
 btn.reset.onclick = function(){ resetCanvas(); }
 btn.settings.onclick = function() { togglePopup({settings:true}); }
 btn.w0.onclick = function(){ changeWeights(0.5); }
