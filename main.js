@@ -318,7 +318,12 @@ function changeTool(value) {
  */
 function changeVersion(v) {
     if (localStorage.getItem("Version") != VERSION) {
-        let response = confirm("You do not seem to have the most updated version. We recommend that you update by selecting OK.\n(Your current lists and weights will be reset)");
+        let response;
+        if (localStorage.getItem("Version") == null) {
+            response = confirm("Welcome to StudySpot! Please click OK to setup the website.");
+        } else {
+            response = confirm("You do not seem to have the most updated version. We recommend that you update by selecting OK.\n(Your current lists and weights will be reset)");
+        }
         if (response) {
             if (localStorage.getItem("Version") == null || localStorage.getItem("Version") == "1.0.0") {
                 localStorage.removeItem("Lists");
