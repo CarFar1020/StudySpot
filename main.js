@@ -3,7 +3,7 @@ import { popup, overlay, buffers, isPopup, togglePopup } from "./Modules/popup.j
 import { c, textToCanvas, resetCanvas, drawStart, draw } from "./Modules/draw.js";
 import { weights, setWeights, changeWeights, removeWeights, toggleWBtns } from "./Modules/weights.js";
 
-const VERSION = "1.0.1";
+const VERSION = "1.0.2";
 
 const body = document.getElementById("body");
 const QA = document.getElementById("QA");
