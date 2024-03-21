@@ -25,6 +25,7 @@ function addList() {
  */
 function setList() {
     buffers.set.classList.remove("hide");
+    btn.arrow.classList.add("hide");
     btn.info.classList.add("hide");
     select.q.classList.add("hide");
     select.a.classList.add("hide");
