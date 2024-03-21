@@ -303,7 +303,7 @@ img {
 .darkmode {
     background-color: #222;
     border-color: white;
-    color: white;
+    color: #DDD;
 }
 
 textarea.darkmode {
