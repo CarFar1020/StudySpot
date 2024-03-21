@@ -33,7 +33,13 @@ const textBox = {
     textTool: document.getElementById("textTool"),
     name: document.getElementById("nameOfList"),
     categories: document.getElementById("numCategories"),
-    terms: document.getElementById("numTerms")
+    terms: document.getElementById("numTerms"),
+    rangeLow: document.getElementById("rangeLow"),
+    rangeHigh: document.getElementById("rangeHigh")
+};
+
+export const option = {
+    range: document.getElementById("rangeOption")
 };
 
 const slider = {
@@ -41,7 +47,6 @@ const slider = {
 };
 
 export var currentList = {
-    list: null,
     a: null,
     q: null
 };
@@ -52,6 +57,7 @@ export var currentStr = {
     q: null
 };
 
+var maxIndex = 0;
 export var listIndex;
 export var currentElem = '';
 
@@ -89,11 +95,11 @@ function getTouchPosition(e) {
  * Gets a random index of the selected list of terms based on their weights.
  * @returns {Number} An index of a list
  */
-function getRandomIndex() {
+function getRandomIndex(maxIndex) {
     let pool = 0;
-    weights[currentStr.list].forEach(weight => {
-        pool += weight;
-    });
+    for (let i = 0; i < maxIndex; i++) {
+        pool += weights[currentStr.list][i];
+    }
     let chosenIndex = Math.floor(Math.random()*pool);
     for (let wi = 0; wi < weights[currentStr.list].length; wi++) {
         for (let i = 0; i < weights[currentStr.list][wi]; i++) {
@@ -148,7 +154,7 @@ export function next() {
  * Loads the next random term.
  */
 function nextQuestion() {
-    listIndex = getRandomIndex();
+    listIndex = getRandomIndex(maxIndex);
     QA.innerHTML = currentList.q[listIndex] + ": ?";
     textBox.value = "";
     resetCanvas();
@@ -169,9 +175,18 @@ function loadList() {
     for (let s in select) {
         currentStr[s] = select[s].value;
     }
-    currentList.list = lists[currentStr.list];
-    currentList.q = currentList.list[currentStr.q];
-    currentList.a = currentList.list[currentStr.a];
+
+    currentList.q = lists[currentStr.list][currentStr.q];
+    currentList.a = lists[currentStr.list][currentStr.a];
+
+    let rangeLow = textBox.rangeLow.value;
+    let rangeHigh = textBox.rangeHigh.value;
+    maxIndex = currentList.q.length;
+    if (rangeLow != null && rangeHigh != null) {
+        maxIndex = rangeHigh - rangeLow;
+        currentList.q = currentList.q.slice(rangeLow-1, rangeHigh);
+        currentList.a = currentList.a.slice(rangeLow-1, rangeHigh);
+    }
 
     btn.next.removeAttribute("disabled");
     btn.next.innerHTML = "Start";
@@ -385,6 +400,7 @@ select.textbox.onchange = function(){ changeTool(select.textbox.value); }
 select.list.addEventListener("change", e => {
     setSelector(select.q, lists[select.list.value]);
     setSelector(select.a, lists[select.list.value]);
+    option.range.classList.remove("hide");
     btn.load.classList.add("hide");
 });
 

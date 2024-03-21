@@ -1,4 +1,4 @@
-import { select, btn, setSelector } from "../main.js";
+import { select, btn, option, setSelector } from "../main.js";
 import { lists } from "./lists.js";
 
 export const popup = document.getElementById("popup");
@@ -27,6 +27,7 @@ function setList() {
     buffers.set.classList.remove("hide");
     select.q.classList.add("hide");
     select.a.classList.add("hide");
+    option.range.classList.add("hide");
     btn.load.classList.add("hide");
     setSelector(select.list, lists);
 }
