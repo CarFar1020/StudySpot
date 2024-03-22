@@ -20,6 +20,7 @@ export const btn = {
     continue: document.getElementById("continue"),
     load: document.getElementById("loadList"),
     next: document.getElementById("next"),
+    arrow: document.getElementById("arrow"),
     setList: document.getElementById("setList"),
     info: document.getElementById("info"),
     reset: document.getElementById("reset"),
@@ -362,14 +363,6 @@ function loadSettings() {
     }
 }
 
-/**
- * Displays info about the current selected list.
- * @param {String} list The name of the list
- */
-function listInfo(list) {
-
-}
-
 changeVersion(VERSION);
 resetCanvas();
 setWeights();
@@ -434,8 +427,9 @@ btn.addList.onclick = function() { togglePopup({add:true}); }
 btn.continue.onclick = function() { continueList(parseInt(textBox.categories.value) || 0, parseInt(textBox.terms.value) || 0, textBox.name.value); }
 btn.load.onclick = function(){ loadList(); }
 btn.next.onclick = function(){ next(); }
+btn.arrow.onclick = function(){ togglePopup({set:true}, true, true); }
 btn.setList.onclick = function(){ togglePopup({set:true}); }
-btn.info.onclick = function(){ listInfo(currentStr.list); }
+btn.info.onclick = function(){ togglePopup({info:true}, true, false, currentStr.list); }
 btn.reset.onclick = function(){ resetCanvas(); }
 btn.settings.onclick = function() { togglePopup({settings:true}); }
 btn.w0.onclick = function(){ changeWeights(0.5); }
