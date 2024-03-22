@@ -254,12 +254,16 @@ button:hover {
 }
 
 #arrowIcon {
-    width: 3vmin;
+    width: auto;
     height: 3vmin;
 }
 
 #info:hover, #arrow:hover {
     background-color: white;
+}
+
+#info.darkmode, #arrow.darkmode {
+    background: #222;
 }
 
 #info.darkmode:hover, #arrow.darkmode:hover {
