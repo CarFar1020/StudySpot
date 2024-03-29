@@ -20,6 +20,7 @@ export const btn = {
     continue: document.getElementById("continue"),
     load: document.getElementById("loadList"),
     next: document.getElementById("next"),
+    arrow: document.getElementById("arrow"),
     setList: document.getElementById("setList"),
     info: document.getElementById("info"),
     reset: document.getElementById("reset"),
@@ -46,6 +47,10 @@ export const option = {
 const slider = {
     darkmode: document.getElementById("darkmodeSlider")
 };
+
+const check = {
+    darkmode: document.getElementById("darkmodeCheck")
+}
 
 export var currentList = {
     a: null,
@@ -219,6 +224,7 @@ function toggleDarkMode() {
     });
     if (isDarkmode) isDarkmode = false;
     else isDarkmode = true;
+    localStorage.setItem("Darkmode", isDarkmode);
     resetCanvas()
 }
 
@@ -350,10 +356,18 @@ function changeVersion(v) {
     }
 }
 
+function loadSettings() {
+    if (localStorage.getItem("Darkmode")) {
+        toggleDarkMode();
+        check.darkmode.checked = true;
+    }
+}
+
 changeVersion(VERSION);
 resetCanvas();
 setWeights();
 loadLists();
+loadSettings();
 
 document.addEventListener("keydown", e => {
     switch (e.key) {
@@ -413,8 +427,9 @@ btn.addList.onclick = function() { togglePopup({add:true}); }
 btn.continue.onclick = function() { continueList(parseInt(textBox.categories.value) || 0, parseInt(textBox.terms.value) || 0, textBox.name.value); }
 btn.load.onclick = function(){ loadList(); }
 btn.next.onclick = function(){ next(); }
+btn.arrow.onclick = function(){ togglePopup({set:true}, true, true); }
 btn.setList.onclick = function(){ togglePopup({set:true}); }
-btn.info.onclick = function(){  }
+btn.info.onclick = function(){ togglePopup({info:true}, true, false, currentStr.list); }
 btn.reset.onclick = function(){ resetCanvas(); }
 btn.settings.onclick = function() { togglePopup({settings:true}); }
 btn.w0.onclick = function(){ changeWeights(0.5); }

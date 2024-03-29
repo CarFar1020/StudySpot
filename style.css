@@ -253,11 +253,20 @@ button:hover {
     height: 2vmin;
 }
 
-#info:hover {
+#arrowIcon {
+    width: auto;
+    height: 3vmin;
+}
+
+#info:hover, #arrow:hover {
     background-color: white;
 }
 
-#info.darkmode {
+#info.darkmode, #arrow.darkmode {
+    background: #222;
+}
+
+#info.darkmode:hover, #arrow.darkmode:hover {
     background-color: #222;
 }
 
