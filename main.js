@@ -347,9 +347,13 @@ function changeVersion(v) {
             response = confirm("You do not seem to have the most updated version. We recommend that you update by selecting OK.\n(Your current lists and weights will be reset)");
         }
         if (response) {
-            if (localStorage.getItem("Version") == null || localStorage.getItem("Version") == "1.0.0") {
-                localStorage.removeItem("Lists");
-                localStorage.removeItem("Weights");
+            if (localStorage.getItem("Version") != null) {
+                let curVersion = VERSION.split();
+                let userVersion = localStorage.getItem("Version").split();
+                if (parseInt(userVersion[2]) < parseInt(curVersion[2])) {
+                    localStorage.removeItem("Lists");
+                    localStorage.removeItem("Weights");
+                }
             }
             localStorage.setItem("Version", VERSION);
         }
