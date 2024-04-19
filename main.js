@@ -394,6 +394,7 @@ document.addEventListener("touchstart", e => {
 });
 
 document.addEventListener("touchmove", e => {
+    e.preventDefault();
     let pos = getTouchPosition(e);
     draw(pos);
 });
