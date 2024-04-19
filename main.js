@@ -397,7 +397,7 @@ document.addEventListener("touchmove", e => {
     e.preventDefault();
     let pos = getTouchPosition(e);
     draw(pos);
-});
+}, { passive: false });
 
 document.addEventListener("mousedown", e => {
     let pos = getMousePosition(e);
