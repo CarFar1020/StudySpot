@@ -393,19 +393,19 @@ document.addEventListener("touchstart", e => {
     drawStart(pos);
 });
 
-document.addEventListener("touchmove", e => {
+c.addEventListener("touchmove", e => {
     e.preventDefault();
     let pos = getTouchPosition(e);
     draw(pos);
 }, { passive: false });
 
-document.addEventListener("mousedown", e => {
+c.addEventListener("mousedown", e => {
     let pos = getMousePosition(e);
     drawStart(pos);
     isMouse = true;
 });
 
-document.addEventListener("mousemove", e => {
+c.addEventListener("mousemove", e => {
     if (isMouse) {
         let pos = getMousePosition(e);
         draw(pos);
