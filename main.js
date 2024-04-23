@@ -76,10 +76,10 @@ var isMouse = false;
  * @returns {Object}  The position of the mouse evemt
  */
 function getMousePosition(e) {
-    let rect = c.getBoundingClientRect();
+    e.preventDefault();
     return {
-        x: (e.clientX - rect.left) * (c.width / rect.width),
-        y: (e.clientY - rect.top) * (c.height / rect.height)
+        x: (e.clientX - c.offsetLeft) * (c.width / c.offsetWidth),
+        y: (e.clientY - c.offsetTop) * (c.height / c.offsetHeight)
     };
 }
 
@@ -89,11 +89,10 @@ function getMousePosition(e) {
  * @returns {Object}  The position of the touch event
  */
 function getTouchPosition(e) {
-    let touch = e.touches[0] || e.changedTouches[0];
-    let rect = c.getBoundingClientRect();
+    e.preventDefault();
     return {
-        x: (touch.pageX - rect.left) * (c.width / rect.width),
-        y: (touch.pageY - rect.top) * (c.height / rect.height)
+        x: (e.targetTouches[0].pageX - c.offsetLeft) * (c.width / c.offsetWidth),
+        y: (e.targetTouches[0].pageY - c.offsetTop) * (c.height / c.offsetHeight)
     }
 }
 
@@ -394,7 +393,6 @@ document.addEventListener("touchstart", e => {
 });
 
 c.addEventListener("touchmove", e => {
-    e.preventDefault();
     let pos = getTouchPosition(e);
     draw(pos);
 }, { passive: false });
