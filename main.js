@@ -91,8 +91,8 @@ function getMousePosition(e) {
 function getTouchPosition(e) {
     e.preventDefault();
     return {
-        x: (e.targetTouches[0].pageX - c.offsetLeft) * (c.width / c.offsetWidth),
-        y: (e.targetTouches[0].pageY - c.offsetTop) * (c.height / c.offsetHeight)
+        x: (e.targetTouches[0].clientX - c.offsetLeft) * (c.width / c.offsetWidth),
+        y: (e.targetTouches[0].clientY - c.offsetTop) * (c.height / c.offsetHeight)
     }
 }
 
